@@ -26,17 +26,17 @@ class SCAStartPageSteps extends ScalaDsl with EN with Matchers with WebBrowser {
   Then("""^I am on SCA start page$""")(() => assert(SCAStartPage.verifySCAStartPage()))
 
   Then("""^I should see SCA title page Header contain logo text as$""") { (logoText: String) =>
-    println(logoText)
+    // println(logoText)
     assert(SCAStartPage.verifySCAStartPageHeaderLogoText(logoText))
   }
 
   Then("""^I should see SCA title page Header contain service name as$""") { (serviceName: String) =>
-    println(serviceName)
+    // println(serviceName)
     assert(SCAStartPage.verifySCAStartPageHeaderServiceName(serviceName))
   }
 
   Then("""^I should see SCA title page footer contain$""") { (pageFooterName: String) =>
-    println(pageFooterName)
+    // println(pageFooterName)
     assert(SCAStartPage.verifySCAStartPageFooter(pageFooterName))
   }
   When("""^I click on Sign out button on SCA title page header$""") {
@@ -46,7 +46,7 @@ class SCAStartPageSteps extends ScalaDsl with EN with Matchers with WebBrowser {
   Then("""^I should get re-directed to customer feedback page$""")(() => assert(SCAStartPage.verifyFeedbackPageURL()))
 
   Then("""^I should see customer feedback page contain body text as$""") { (feedbackPageText: String) =>
-    println(feedbackPageText)
+    // println(feedbackPageText)
     assert(SCAStartPage.verifyFeedbackPageText(feedbackPageText))
   }
 

@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.test.ui.cucumber.stepdefs
 
-import io.cucumber.scala.{EN, PendingException, ScalaDsl}
+import io.cucumber.scala.{EN, ScalaDsl}
 import org.scalatest.matchers.must.Matchers
 import org.scalatestplus.selenium._
 import uk.gov.hmrc.test.ui.pages.GGLoginPage
@@ -25,7 +25,6 @@ class GGLoginSteps extends ScalaDsl with EN with Matchers with WebBrowser {
 
   Given("""^I am on GG Login Page$""") { () =>
     GGLoginPage.navigateToStartPage()
-    throw new PendingException()
   }
 
   Given("""^I log into the GG Login Page$""") { () =>
