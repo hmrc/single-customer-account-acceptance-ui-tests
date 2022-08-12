@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 HM Revenue & Customs
+ * Copyright 2022 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,16 +16,21 @@
 
 package uk.gov.hmrc.test.ui.cucumber.stepdefs
 
-import io.cucumber.scala.{EN, ScalaDsl, Scenario}
-import org.openqa.selenium.{OutputType, TakesScreenshot}
-import uk.gov.hmrc.test.ui.driver.BrowserDriver
+import io.cucumber.scala.{EN, PendingException, ScalaDsl}
+import org.scalatest.matchers.must.Matchers
+import org.scalatestplus.selenium._
+import uk.gov.hmrc.test.ui.pages.GGLoginPage
 
-class Hooks extends ScalaDsl with EN with BrowserDriver {
-  After { scenario: Scenario =>
-    if (scenario.isFailed) {
-      val screenshotName = scenario.getName.replaceAll(" ", "_")
-      val screenshot     = driver.asInstanceOf[TakesScreenshot].getScreenshotAs(OutputType.BYTES)
-      scenario.attach(screenshot, "image/png", screenshotName)
-    }
+class GGLoginSteps extends ScalaDsl with EN with Matchers with WebBrowser {
+
+  Given("""^I am on GG Login Page$""") { () =>
+    GGLoginPage.navigateToStartPage()
+    throw new PendingException()
+  }
+
+  Given("""^I log into the GG Login Page$""") { () =>
+    GGLoginPage.navigateToAuthLoginStub()
+    GGLoginPage.enterRedirectURL()
+    GGLoginPage.clickSubmitButton()
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 HM Revenue & Customs
+ * Copyright 2022 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,24 +14,18 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.pages
+package uk.gov.hmrc.test.ui.utils.BrowserPackage
 
-import org.openqa.selenium.By
+import uk.gov.hmrc.test.ui.pages.config.Configuration
 
-object CostOfGoods extends BasePage {
+import java.util.concurrent.TimeUnit
 
-  val costOfGoods      = "Enter your cost of goods - Check your VAT flat rate - GOV.UK"
-  val costOfGoodsInput = "costOfGoods"
+trait StartUpTearDown {
 
-  def provideCostOfGoodsAmount(amount: String): this.type = {
-    onPage(costOfGoods)
-    driver.findElement(By.id(costOfGoodsInput)).sendKeys(amount)
-    this
-  }
-
-  def submitVATInformation: CheckYourVATResult.type = {
-    submitPage()
-    CheckYourVATResult
-  }
-
+  def driver                  = Driver.webDriver
+  implicit lazy val webDriver = driver
+  driver
+    .manage()
+    .timeouts()
+    .implicitlyWait(Configuration.settings.PAGE_TIMEOUT_SECS, TimeUnit.SECONDS)
 }
