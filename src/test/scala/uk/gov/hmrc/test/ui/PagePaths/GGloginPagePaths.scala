@@ -14,16 +14,19 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.driver
+package uk.gov.hmrc.test.ui.PagePaths
 
-import com.typesafe.scalalogging.LazyLogging
-import org.openqa.selenium.WebDriver
-import uk.gov.hmrc.webdriver.SingletonDriver
-
-trait BrowserDriver extends LazyLogging {
-  logger.info(
-    s"Instantiating Browser: ${sys.props.getOrElse("browser", "'browser' System property not set. This is required")}"
-  )
-
-  implicit lazy val driver: WebDriver = SingletonDriver.getInstance()
+trait GGloginPagePaths {
+  val redirectURLField     = "redirectionUrl"
+  val confidenceLevelField = "confidenceLevel"
+  val submitButton         = "submit"
+}
+trait SCAStartPagePaths {
+  val logoText      = "./html/body/header/div[1]/div/div[1]/a/span/span"
+  val serviceName   = "./html/body/header/div[1]/div/div[2]/a"
+  val footer        = "./html/body/footer/div/div/div[2]/a"
+  val SignoutButton = "./html/body/header/div[1]/div/div[2]/nav/a"
+}
+trait FeedbackPagePaths {
+  val feedbackPageTitle = "./html/body/div/main/div/div/form/h1"
 }
