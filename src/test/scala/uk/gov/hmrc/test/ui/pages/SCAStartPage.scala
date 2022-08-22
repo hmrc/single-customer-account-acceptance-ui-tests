@@ -45,13 +45,37 @@ object SCAStartPage extends StartUpTearDown with GGloginPagePaths with SCAStartP
       .ignoring(classOf[Nothing])
       .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(serviceName), headerServiceName))
 
+  def searchResults(name: String): Boolean                  =
+    new FluentWait[WebDriver](driver)
+      .withTimeout(Duration.ofSeconds(10))
+      .ignoring(classOf[Nothing])
+      .until(ExpectedConditions.textToBePresentInElementLocated(By.id(accountName), name))
   def verifySCAStartPageFooter(footerName: String): Boolean =
     new FluentWait[WebDriver](driver)
       .withTimeout(Duration.ofSeconds(10))
       .ignoring(classOf[Nothing])
       .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(footer), footerName))
 
-  def clickOnSignout(): Unit = driver.findElement(By.xpath(SignoutButton)).click()
+  def clickOnFeedback(): Unit = driver.findElement(By.xpath(Feedbacklink)).click()
+
+  def verifyNewServiceFeedbackPageText(feedbackPageText: String): Boolean =
+    new FluentWait[WebDriver](driver)
+      .withTimeout(Duration.ofSeconds(10))
+      .ignoring(classOf[Nothing])
+      .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(serviceFeedbackPageTitle), feedbackPageText))
+
+  def returnToHomepage(): Unit                                            = driver.navigate.back()
+  def clickOnPageNotWorking(): Unit                                       = driver.findElement(By.xpath(TechnicalHelpPage)).click()
+  def verifyTechnicalHelpPageText(technicalHelpPageText: String): Boolean =
+    new FluentWait[WebDriver](driver)
+      .withTimeout(Duration.ofSeconds(10))
+      .ignoring(classOf[Nothing])
+      .until(
+        ExpectedConditions.textToBePresentInElementLocated(By.xpath(technicalHelpPageTitle), technicalHelpPageText)
+      )
+
+  def returnToSCApage(): Unit = driver.switchTo.window(HomepageTitle)
+  def clickOnSignout(): Unit  = driver.findElement(By.xpath(SignoutButton)).click()
 
   def verifyFeedbackPageURL(): Boolean =
     new FluentWait[WebDriver](driver)
@@ -64,5 +88,7 @@ object SCAStartPage extends StartUpTearDown with GGloginPagePaths with SCAStartP
       .withTimeout(Duration.ofSeconds(10))
       .ignoring(classOf[Nothing])
       .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(feedbackPageTitle), feedbackPageText))
+
+  val HomepageTitle = "Single Customer Account"
 
 }
