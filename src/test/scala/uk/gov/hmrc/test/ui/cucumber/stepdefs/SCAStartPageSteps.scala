@@ -20,6 +20,7 @@ import io.cucumber.scala.{EN, ScalaDsl}
 import org.scalatest.matchers.must.Matchers
 import org.scalatestplus.selenium._
 import uk.gov.hmrc.test.ui.pages.SCAStartPage
+// import uk.gov.hmrc.test.ui.pages.SCAStartPage.driver
 
 class SCAStartPageSteps extends ScalaDsl with EN with Matchers with WebBrowser {
 
@@ -51,17 +52,10 @@ class SCAStartPageSteps extends ScalaDsl with EN with Matchers with WebBrowser {
 
   Then("""^I should return back to SCA home page$""")(SCAStartPage.returnToHomepage())
 
-  When("""^I click on problem reporting link on SCA home page$""") {
-    SCAStartPage.clickOnPageNotWorking()
+  Then("""^I should see if there is a link present on homepage to report Technical Problems "([^"]*)"$""") {
+    (technicalProblems: String) =>
+      assert(SCAStartPage.verifyTechnicalProblemsLink(technicalProblems))
   }
-
-  Then("""^I should see technical problem reporting page opened in new tab contains page text as "([^"]*)"$""") {
-    (technicalHelpPageText: String) =>
-      assert(SCAStartPage.verifyTechnicalHelpPageText(technicalHelpPageText))
-  }
-
-  Then("""^I should return back to SCA page$""")(SCAStartPage.returnToSCApage())
-
   When("""^I click on Sign out button on SCA title page header$""") {
     SCAStartPage.clickOnSignout()
   }

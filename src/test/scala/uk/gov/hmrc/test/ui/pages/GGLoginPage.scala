@@ -41,13 +41,7 @@ object GGLoginPage extends StartUpTearDown with GGloginPagePaths with SCAStartPa
     val confidenceLevel: Select = new Select(driver.findElement(By.name(confidenceLevelField)))
     confidenceLevel.selectByValue("200")
   }
-
-  def enterUserName(): Unit =
-    driver
-      .findElement(By.name(ggUsersName))
-      .sendKeys(userName)
-
-  def enterNino(): Unit =
+  def enterNino(): Unit        =
     driver
       .findElement(By.name(nino))
       .sendKeys(NINumber)
@@ -55,6 +49,5 @@ object GGLoginPage extends StartUpTearDown with GGloginPagePaths with SCAStartPa
   def clickSubmitButton(): Unit =
     driver.findElement(By.id(submitButton)).click()
 
-  val userName = "James Bond"
-  val NINumber = "JJ218487C"
+  val NINumber = "AA999999A"
 }
