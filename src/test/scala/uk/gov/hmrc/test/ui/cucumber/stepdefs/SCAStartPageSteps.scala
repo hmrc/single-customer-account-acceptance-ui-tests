@@ -20,24 +20,41 @@ import io.cucumber.scala.{EN, ScalaDsl}
 import org.scalatest.matchers.must.Matchers
 import org.scalatestplus.selenium._
 import uk.gov.hmrc.test.ui.pages.SCAStartPage
+// import uk.gov.hmrc.test.ui.pages.SCAStartPage.driver
 
 class SCAStartPageSteps extends ScalaDsl with EN with Matchers with WebBrowser {
 
   Then("""^I am on SCA start page$""")(() => assert(SCAStartPage.verifySCAStartPage()))
 
-  Then("""^I should see SCA title page Header contain logo text as$""") { (logoText: String) =>
-    // println(logoText)
+  Then("""^I should see SCA title page Header contain logo text as "([^"]*)"$""") { (logoText: String) =>
     assert(SCAStartPage.verifySCAStartPageHeaderLogoText(logoText))
   }
 
-  Then("""^I should see SCA title page Header contain service name as$""") { (serviceName: String) =>
-    // println(serviceName)
+  Then("""^I should see SCA title page Header contain service name as "([^"]*)"$""") { (serviceName: String) =>
     assert(SCAStartPage.verifySCAStartPageHeaderServiceName(serviceName))
   }
 
-  Then("""^I should see SCA title page footer contain$""") { (pageFooterName: String) =>
-    // println(pageFooterName)
+  Then("""^I should see SCA name as "([^"]*)"$""") { (name: String) =>
+    assert(SCAStartPage.searchResults(name))
+  }
+
+  Then("""^I should see SCA title page footer contain "([^"]*)"$""") { (pageFooterName: String) =>
     assert(SCAStartPage.verifySCAStartPageFooter(pageFooterName))
+  }
+
+  When("""^I click on new service feedback link$""") {
+    SCAStartPage.clickOnFeedback()
+  }
+
+  Then("""^I should see feedback page contain text as "([^"]*)"$""") { (feedbackPageText: String) =>
+    assert(SCAStartPage.verifyNewServiceFeedbackPageText(feedbackPageText))
+  }
+
+  Then("""^I should return back to SCA home page$""")(SCAStartPage.returnToHomepage())
+
+  Then("""^I should see if there is a link present on homepage to report Technical Problems "([^"]*)"$""") {
+    (technicalProblems: String) =>
+      assert(SCAStartPage.verifyTechnicalProblemsLink(technicalProblems))
   }
   When("""^I click on Sign out button on SCA title page header$""") {
     SCAStartPage.clickOnSignout()
@@ -45,8 +62,7 @@ class SCAStartPageSteps extends ScalaDsl with EN with Matchers with WebBrowser {
 
   Then("""^I should get re-directed to customer feedback page$""")(() => assert(SCAStartPage.verifyFeedbackPageURL()))
 
-  Then("""^I should see customer feedback page contain body text as$""") { (feedbackPageText: String) =>
-    // println(feedbackPageText)
+  Then("""^I should see customer feedback page contain text as "([^"]*)"$""") { (feedbackPageText: String) =>
     assert(SCAStartPage.verifyFeedbackPageText(feedbackPageText))
   }
 

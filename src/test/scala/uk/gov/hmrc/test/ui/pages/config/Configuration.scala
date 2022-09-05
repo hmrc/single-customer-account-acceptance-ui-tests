@@ -44,15 +44,6 @@ object Configuration {
 
   private def create(): Configuration =
     environment match {
-      case Environment.dev =>
-        new Configuration(
-          APP_ROOT =
-            " https://www.development.tax.service.gov.uk/auth-login-stub/gg-sign-in?continue=%2Fsingle-customer-account",
-          APPROOT = " https://www.development.tax.service.gov.uk/single-customer-account",
-          AUTHLOGINSTUB = "https://www.developmet.tax.service.gov.uk/auth-login-stub/gg-sign-in",
-          FEEDBACK_PAGE = "https://www.development.tax.service.gov.uk/feedback/single-customer-account-frontend",
-          PAGE_TIMEOUT_SECS = 60
-        )
 
       case Environment.Local =>
         new Configuration(
@@ -63,14 +54,25 @@ object Configuration {
           PAGE_TIMEOUT_SECS = 60
         )
 
-      case Environment.Qa      =>
+      case Environment.dev =>
+        new Configuration(
+          APP_ROOT =
+            "https://www.development.tax.service.gov.uk/auth-login-stub/gg-sign-in?continue=%2Fsingle-customer-account",
+          APPROOT = "https://www.development.tax.service.gov.uk/single-customer-account",
+          AUTHLOGINSTUB = "https://www.development.tax.service.gov.uk/auth-login-stub/gg-sign-in",
+          FEEDBACK_PAGE = "https://www.development.tax.service.gov.uk/feedback/single-customer-account-frontend",
+          PAGE_TIMEOUT_SECS = 60
+        )
+
+      case Environment.Qa =>
         new Configuration(
           APP_ROOT = "https://www.qa.tax.service.gov.uk/auth-login-stub/gg-sign-in?continue=%2Fsingle-customer-account",
           APPROOT = "https://www.qa.tax.service.gov.uk/single-customer-account",
           AUTHLOGINSTUB = "https://www.qa.tax.service.gov.uk/auth-login-stub/gg-sign-in",
-          FEEDBACK_PAGE = "TBC",
+          FEEDBACK_PAGE = "https://www.qa.tax.service.gov.uk/feedback/single-customer-account-frontend",
           PAGE_TIMEOUT_SECS = 60
         )
+
       case Environment.Staging =>
         new Configuration(
           APP_ROOT =

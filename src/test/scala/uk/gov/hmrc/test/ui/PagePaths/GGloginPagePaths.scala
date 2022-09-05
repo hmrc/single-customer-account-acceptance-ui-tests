@@ -19,14 +19,21 @@ package uk.gov.hmrc.test.ui.PagePaths
 trait GGloginPagePaths {
   val redirectURLField     = "redirectionUrl"
   val confidenceLevelField = "confidenceLevel"
-  val submitButton         = "submit"
+  val nino                 = "nino"
+  val submitButton         = "submit-top"
 }
 trait SCAStartPagePaths {
-  val logoText      = "./html/body/header/div[1]/div/div[1]/a/span/span"
-  val serviceName   = "./html/body/header/div[1]/div/div[2]/a"
-  val footer        = "./html/body/footer/div/div/div[2]/a"
-  val SignoutButton = "./html/body/header/div[1]/div/div[2]/nav/a"
+  val logoText              = "./html/body/header/div[1]/div/div[1]/a/span/span"
+  val serviceName           = "./html/body/header/div[1]/div/div[2]/a"
+  val accountName           = "name"
+  val footer                = "./html/body/footer/div/div/div[2]/a"
+  val Feedbacklink          = "./html/body/header/div[2]/div/p/span/a"
+  val technicalProblemslink = "./html/body/div/main/div/div/a"
+  val SignoutButton         = "./html/body/header/div[1]/div/div[2]/nav/a"
 }
 trait FeedbackPagePaths {
-  val feedbackPageTitle = "./html/body/div/main/div/div/form/h1"
+  val feedbackPageTitle        = "./html/body/div/main/div/div/form/h1"
+  val serviceFeedbackPageTitle = "./html/body/div/main/div/div/h1"
+  val TechnicalHelpPage        = "./html/body/div/main/div/div/a"
+  val technicalHelpPageTitle   = "head > title"
 }

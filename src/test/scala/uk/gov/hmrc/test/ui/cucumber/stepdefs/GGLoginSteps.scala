@@ -30,6 +30,8 @@ class GGLoginSteps extends ScalaDsl with EN with Matchers with WebBrowser {
   Given("""^I log into the GG Login Page$""") { () =>
     GGLoginPage.navigateToAuthLoginStub()
     GGLoginPage.enterRedirectURL()
+    GGLoginPage.selectConfidenceLevel()
+    GGLoginPage.enterNino()
     GGLoginPage.clickSubmitButton()
   }
 }

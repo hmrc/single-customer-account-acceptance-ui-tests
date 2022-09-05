@@ -16,8 +16,10 @@
 
 package uk.gov.hmrc.test.ui.pages
 
+// import com.ibm.icu.impl.Assert.fail
 import org.openqa.selenium.{By, WebDriver}
 import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait}
+// import org.scalatestplus.selenium.Chrome.{window, windowHandles}
 import uk.gov.hmrc.test.ui.PagePaths.{FeedbackPagePaths, GGloginPagePaths, SCAStartPagePaths}
 import uk.gov.hmrc.test.ui.pages.config.Configuration
 import uk.gov.hmrc.test.ui.utils.BrowserPackage.StartUpTearDown
@@ -45,13 +47,33 @@ object SCAStartPage extends StartUpTearDown with GGloginPagePaths with SCAStartP
       .ignoring(classOf[Nothing])
       .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(serviceName), headerServiceName))
 
+  def searchResults(name: String): Boolean                  =
+    new FluentWait[WebDriver](driver)
+      .withTimeout(Duration.ofSeconds(10))
+      .ignoring(classOf[Nothing])
+      .until(ExpectedConditions.textToBePresentInElementLocated(By.id(accountName), name))
   def verifySCAStartPageFooter(footerName: String): Boolean =
     new FluentWait[WebDriver](driver)
       .withTimeout(Duration.ofSeconds(10))
       .ignoring(classOf[Nothing])
       .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(footer), footerName))
 
-  def clickOnSignout(): Unit = driver.findElement(By.xpath(SignoutButton)).click()
+  def clickOnFeedback(): Unit = driver.findElement(By.xpath(Feedbacklink)).click()
+
+  def verifyNewServiceFeedbackPageText(feedbackPageText: String): Boolean =
+    new FluentWait[WebDriver](driver)
+      .withTimeout(Duration.ofSeconds(10))
+      .ignoring(classOf[Nothing])
+      .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(serviceFeedbackPageTitle), feedbackPageText))
+
+  def returnToHomepage(): Unit = driver.navigate.back()
+
+  def verifyTechnicalProblemsLink(technicalProblems: String): Boolean =
+    new FluentWait[WebDriver](driver)
+      .withTimeout(Duration.ofSeconds(10))
+      .ignoring(classOf[Nothing])
+      .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(technicalProblemslink), technicalProblems))
+  def clickOnSignout(): Unit                                          = driver.findElement(By.xpath(SignoutButton)).click()
 
   def verifyFeedbackPageURL(): Boolean =
     new FluentWait[WebDriver](driver)
@@ -64,5 +86,7 @@ object SCAStartPage extends StartUpTearDown with GGloginPagePaths with SCAStartP
       .withTimeout(Duration.ofSeconds(10))
       .ignoring(classOf[Nothing])
       .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(feedbackPageTitle), feedbackPageText))
+
+  val HomepageTitle = "Single Customer Account"
 
 }
