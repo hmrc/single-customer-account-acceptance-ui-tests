@@ -21,6 +21,7 @@ trait GGloginPagePaths {
   val confidenceLevelField = "confidenceLevel"
   val nino                 = "nino"
   val submitButton         = "submit-top"
+  val ninoValidationError  = "/html/body/div/main/div/div/form/div[1]/div/ul/li/a"
 }
 trait SCAStartPagePaths {
   val logoText              = "./html/body/header/div[1]/div/div[1]/a/span/span"
@@ -30,6 +31,7 @@ trait SCAStartPagePaths {
   val Feedbacklink          = "./html/body/header/div[2]/div/p/span/a"
   val technicalProblemslink = "./html/body/div/main/div/div/a"
   val SignoutButton         = "./html/body/header/div[1]/div/div[2]/nav/a"
+  val SCAAccessErrorText    = "govuk-heading-xl"
 }
 trait FeedbackPagePaths {
   val feedbackPageTitle        = "./html/body/div/main/div/div/form/h1"

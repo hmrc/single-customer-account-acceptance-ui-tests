@@ -1,7 +1,7 @@
 **This is a template README.md.  Be sure to update this with project specific content that describes your ui test project.**
 
 # single-customer-account-acceptance-ui-tests
-UI test suite for the `<digital service name>` using WebDriver and `<scalatest/cucumber>`.  
+UI test suite for the `Single Customer Account` using WebDriver and `<scalatest/cucumber>`.  
 
 ## Running the tests
 
@@ -13,7 +13,7 @@ Prior to executing the tests ensure you have:
 Run the following command to start services locally:
 
     docker run --rm -d --name mongo -d -p 27017:27017 mongo:4.0
-    sm --start PLATFORM_EXAMPLE_UI_TESTS -r --wait 100
+    sm --start SCA_FUTURES_ALL -r --wait 100
 
 Using the `--wait 100` argument ensures a health check is run on all the services started as part of the profile. `100` refers to the given number of seconds to wait for services to pass health checks.
 
