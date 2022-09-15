@@ -30,6 +30,7 @@ trait SCAStartPagePaths {
   val Feedbacklink          = "./html/body/header/div[2]/div/p/span/a"
   val technicalProblemslink = "./html/body/div/main/div/div/a"
   val SignoutButton         = "./html/body/header/div[1]/div/div[2]/nav/a"
+  val SCAAccessErrorText    = "govuk-heading-xl"
 }
 trait FeedbackPagePaths {
   val feedbackPageTitle        = "./html/body/div/main/div/div/form/h1"
