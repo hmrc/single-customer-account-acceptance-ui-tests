@@ -34,12 +34,30 @@ class SCAStartPageSteps extends ScalaDsl with EN with Matchers with WebBrowser {
     assert(SCAStartPage.verifySCAStartPageHeaderServiceName(serviceName))
   }
 
+  Then("""^I should see SCA title page footer contain "([^"]*)"$""") { (pageFooterName: String) =>
+    assert(SCAStartPage.verifySCAStartPageFooter(pageFooterName))
+  }
+
+  Then("""^I should see if there is a link present on homepage to report Technical Problems "([^"]*)"$""") {
+    (technicalProblems: String) =>
+      assert(SCAStartPage.verifyTechnicalProblemsLink(technicalProblems))
+  }
+
+  When("""^I click on 'Home' on SCA landing page menu$""") {
+    SCAStartPage.clickOnAccountHome()
+  }
+
   Then("""^I should see SCA name as "([^"]*)"$""") { (name: String) =>
     assert(SCAStartPage.searchResults(name))
   }
 
-  Then("""^I should see SCA title page footer contain "([^"]*)"$""") { (pageFooterName: String) =>
-    assert(SCAStartPage.verifySCAStartPageFooter(pageFooterName))
+  When("""^I click on 'Your Taxes and Benefits' on SCA landing page menu$""") {
+    SCAStartPage.clickOnTaxesAndBenefits()
+  }
+
+  Then("""^I should see following services available "([^"]*)" "([^"]*)" "([^"]*)" "([^"]*)"$""") {
+    (SA: String, PAYE: String, NI: String, StatePension: String) =>
+      assert(SCAStartPage.searchResult(SA, PAYE, NI, StatePension))
   }
 
   When("""^I click on new service feedback link$""") {
@@ -52,10 +70,6 @@ class SCAStartPageSteps extends ScalaDsl with EN with Matchers with WebBrowser {
 
   Then("""^I should return back to SCA home page$""")(SCAStartPage.returnToHomepage())
 
-  Then("""^I should see if there is a link present on homepage to report Technical Problems "([^"]*)"$""") {
-    (technicalProblems: String) =>
-      assert(SCAStartPage.verifyTechnicalProblemsLink(technicalProblems))
-  }
   When("""^I click on Sign out button on SCA title page header$""") {
     SCAStartPage.clickOnSignout()
   }

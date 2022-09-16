@@ -47,18 +47,44 @@ object SCAStartPage extends StartUpTearDown with GGloginPagePaths with SCAStartP
       .ignoring(classOf[Nothing])
       .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(serviceName), headerServiceName))
 
-  def searchResults(name: String): Boolean                  =
-    new FluentWait[WebDriver](driver)
-      .withTimeout(Duration.ofSeconds(10))
-      .ignoring(classOf[Nothing])
-      .until(ExpectedConditions.textToBePresentInElementLocated(By.id(accountName), name))
-  def verifySCAStartPageFooter(footerName: String): Boolean =
+  def verifySCAStartPageFooter(footerName: String): Boolean           =
     new FluentWait[WebDriver](driver)
       .withTimeout(Duration.ofSeconds(10))
       .ignoring(classOf[Nothing])
       .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(footer), footerName))
+  def verifyTechnicalProblemsLink(technicalProblems: String): Boolean =
+    new FluentWait[WebDriver](driver)
+      .withTimeout(Duration.ofSeconds(10))
+      .ignoring(classOf[Nothing])
+      .until(ExpectedConditions.textToBePresentInElementLocated(By.className(technicalProblemslink), technicalProblems))
 
-  def clickOnFeedback(): Unit = driver.findElement(By.xpath(Feedbacklink)).click()
+  def clickOnAccountHome(): Unit           = driver.findElement(By.id(accountHome)).click()
+  def searchResults(name: String): Boolean =
+    new FluentWait[WebDriver](driver)
+      .withTimeout(Duration.ofSeconds(10))
+      .ignoring(classOf[Nothing])
+      .until(ExpectedConditions.textToBePresentInElementLocated(By.id(accountName), name))
+
+  def clickOnTaxesAndBenefits(): Unit = driver.findElement(By.id(TaxesAndBenefits)).click()
+  def searchResult(SA: String, PAYE: String, NI: String, StatePension: String): Boolean = {
+    new FluentWait[WebDriver](driver)
+      .withTimeout(Duration.ofSeconds(10))
+      .ignoring(classOf[Nothing])
+      .until(ExpectedConditions.textToBePresentInElementLocated(By.id(selfAssesment), SA))
+    new FluentWait[WebDriver](driver)
+      .withTimeout(Duration.ofSeconds(10))
+      .ignoring(classOf[Nothing])
+      .until(ExpectedConditions.textToBePresentInElementLocated(By.id(PayAsYouEarn), PAYE))
+    new FluentWait[WebDriver](driver)
+      .withTimeout(Duration.ofSeconds(10))
+      .ignoring(classOf[Nothing])
+      .until(ExpectedConditions.textToBePresentInElementLocated(By.id(Nino), NI))
+    new FluentWait[WebDriver](driver)
+      .withTimeout(Duration.ofSeconds(10))
+      .ignoring(classOf[Nothing])
+      .until(ExpectedConditions.textToBePresentInElementLocated(By.id(Pension), StatePension))
+  }
+  def clickOnFeedback(): Unit         = driver.findElement(By.xpath(Feedbacklink)).click()
 
   def verifyNewServiceFeedbackPageText(feedbackPageText: String): Boolean =
     new FluentWait[WebDriver](driver)
@@ -66,15 +92,8 @@ object SCAStartPage extends StartUpTearDown with GGloginPagePaths with SCAStartP
       .ignoring(classOf[Nothing])
       .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(serviceFeedbackPageTitle), feedbackPageText))
 
-  def returnToHomepage(): Unit = driver.navigate.back()
-
-  def verifyTechnicalProblemsLink(technicalProblems: String): Boolean =
-    new FluentWait[WebDriver](driver)
-      .withTimeout(Duration.ofSeconds(10))
-      .ignoring(classOf[Nothing])
-      .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(technicalProblemslink), technicalProblems))
-  def clickOnSignout(): Unit                                          = driver.findElement(By.xpath(SignoutButton)).click()
-
+  def returnToHomepage(): Unit         = driver.navigate.back()
+  def clickOnSignout(): Unit           = driver.findElement(By.id(SignoutButton)).click()
   def verifyFeedbackPageURL(): Boolean =
     new FluentWait[WebDriver](driver)
       .withTimeout(Duration.ofSeconds(10))
