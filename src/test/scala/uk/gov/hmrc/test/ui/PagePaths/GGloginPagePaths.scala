@@ -25,11 +25,17 @@ trait GGloginPagePaths {
 trait SCAStartPagePaths {
   val logoText              = "./html/body/header/div[1]/div/div[1]/a/span/span"
   val serviceName           = "./html/body/header/div[1]/div/div[2]/a"
-  val accountName           = "name"
   val footer                = "./html/body/footer/div/div/div[2]/a"
+  val accountHome           = "nav-home"
+  val accountName           = "name"
+  val TaxesAndBenefits      = "nav-taxes-and-benefits"
+  val selfAssesment         = "sa"
+  val PayAsYouEarn          = "paye"
+  val Nino                  = "ni"
+  val Pension               = "ytab"
   val Feedbacklink          = "./html/body/header/div[2]/div/p/span/a"
-  val technicalProblemslink = "./html/body/div/main/div/div/a"
-  val SignoutButton         = "./html/body/header/div[1]/div/div[2]/nav/a"
+  val technicalProblemslink = "hmrc-report-technical-issue"
+  val SignoutButton         = "nav-signout"
   val SCAAccessErrorText    = "govuk-heading-xl"
 }
 trait FeedbackPagePaths {
