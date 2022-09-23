@@ -32,7 +32,7 @@ trait SCAStartPagePaths {
   val selfAssesment         = "sa"
   val PayAsYouEarn          = "paye"
   val Nino                  = "ni"
-  val Pension               = "ytab"
+  val Pension               = "sp"
   val Feedbacklink          = "./html/body/header/div[2]/div/p/span/a"
   val technicalProblemslink = "hmrc-report-technical-issue"
   val SignoutButton         = "nav-signout"
