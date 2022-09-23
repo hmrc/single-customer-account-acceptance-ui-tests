@@ -60,6 +60,15 @@ class SCAStartPageSteps extends ScalaDsl with EN with Matchers with WebBrowser {
       assert(SCAStartPage.searchResult(SA, PAYE, NI, StatePension))
   }
 
+  When("""^I click on 'Your Details' on SCA landing page menu$""") {
+    SCAStartPage.clickOnYourDetails()
+  }
+
+  Then("""^I should see CHOCS title page Header contain service name as "([^"]*)"$""") { (chocsServiceName: String) =>
+    assert(SCAStartPage.verifyCHOCSServiceName(chocsServiceName))
+    SCAStartPage.clickOnAccountHome()
+  }
+
   When("""^I click on new service feedback link$""") {
     SCAStartPage.clickOnFeedback()
   }
