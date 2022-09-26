@@ -84,7 +84,14 @@ object SCAStartPage extends StartUpTearDown with GGloginPagePaths with SCAStartP
       .ignoring(classOf[Nothing])
       .until(ExpectedConditions.textToBePresentInElementLocated(By.id(Pension), StatePension))
   }
-  def clickOnFeedback(): Unit         = driver.findElement(By.xpath(Feedbacklink)).click()
+  def clickOnYourDetails(): Unit      = driver.findElement(By.id(yourDetails)).click()
+
+  def verifyCHOCSServiceName(chocsServiceName: String): Boolean =
+    new FluentWait[WebDriver](driver)
+      .withTimeout(Duration.ofSeconds(10))
+      .ignoring(classOf[Nothing])
+      .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(CHOCSServiceName), chocsServiceName))
+  def clickOnFeedback(): Unit                                   = driver.findElement(By.xpath(Feedbacklink)).click()
 
   def verifyNewServiceFeedbackPageText(feedbackPageText: String): Boolean =
     new FluentWait[WebDriver](driver)
