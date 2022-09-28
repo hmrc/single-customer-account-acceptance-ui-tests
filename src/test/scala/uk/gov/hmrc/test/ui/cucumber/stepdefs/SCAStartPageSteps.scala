@@ -20,7 +20,7 @@ import io.cucumber.scala.{EN, ScalaDsl}
 import org.scalatest.matchers.must.Matchers
 import org.scalatestplus.selenium._
 import uk.gov.hmrc.test.ui.pages.SCAStartPage
-// import uk.gov.hmrc.test.ui.pages.SCAStartPage.driver
+
 
 class SCAStartPageSteps extends ScalaDsl with EN with Matchers with WebBrowser {
 
@@ -66,7 +66,6 @@ class SCAStartPageSteps extends ScalaDsl with EN with Matchers with WebBrowser {
 
   Then("""^I should see CHOCS title page Header contain service name as "([^"]*)"$""") { (chocsServiceName: String) =>
     assert(SCAStartPage.verifyCHOCSServiceName(chocsServiceName))
-    SCAStartPage.clickOnAccountHome()
   }
 
   When("""^I click on new service feedback link$""") {

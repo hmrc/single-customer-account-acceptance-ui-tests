@@ -28,7 +28,6 @@ import uk.gov.hmrc.test.ui.utils.BrowserPackage.StartUpTearDown
 import java.time.Duration
 
 object SCAStartPage extends StartUpTearDown with GGloginPagePaths with SCAStartPagePaths with FeedbackPagePaths {
-
   def verifySCAStartPage(): Boolean =
     new FluentWait[WebDriver](driver)
       .withTimeout(Duration.ofSeconds(10))

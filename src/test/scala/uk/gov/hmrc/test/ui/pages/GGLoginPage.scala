@@ -45,9 +45,22 @@ object GGLoginPage extends StartUpTearDown with GGloginPagePaths with SCAStartPa
     driver
       .findElement(By.name(nino))
       .sendKeys(NINumber)
-
+  def selectSAEnrolment(): Unit = {
+    val EnrolmentSelect: Select = new Select(
+        driver.findElement(By.id(dropdown)))
+        EnrolmentSelect.selectByVisibleText(SelfAssessment)
+        driver.findElement(By.id(addPresent)).click()
+        driver
+         .findElement(By.id(identifierValueForUTRNumber))
+         .sendKeys(UTRNumber)
+  }
   def clickSubmitButton(): Unit =
     driver.findElement(By.id(submitButton)).click()
 
-  val NINumber = "AA999999A"
+  val NINumber = "AA999999D"
+  val dropdown = "presets-dropdown"
+  val SelfAssessment = "SA"
+  val addPresent = "add-preset"
+  val identifierValueForUTRNumber = "input-4-0-value"
+  val UTRNumber = "1126388017"
 }

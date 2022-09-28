@@ -19,31 +19,22 @@ package uk.gov.hmrc.test.ui.cucumber.stepdefs
 import io.cucumber.scala.{EN, ScalaDsl}
 import org.scalatest.matchers.must.Matchers
 import org.scalatestplus.selenium._
-import uk.gov.hmrc.test.ui.pages.GGLoginPage
+import uk.gov.hmrc.test.ui.pages.{SCAStartPage, SCAEnrolments}
 
-class GGLoginSteps extends ScalaDsl with EN with Matchers with WebBrowser {
+class SCAEnrolmentsSteps extends ScalaDsl with EN with Matchers with WebBrowser {
 
-  Given("""^I am on GG Login Page$""") { () =>
-    GGLoginPage.navigateToStartPage()
+  When("""^User selects the SA service from the tax and benefits page$""") {
+    SCAEnrolments.clickOnSelfAssessment()
   }
 
-  Given("""^I log into the GG Login Page$""") { () =>
-    GGLoginPage.navigateToAuthLoginStub()
-    GGLoginPage.enterRedirectURL()
-    GGLoginPage.selectConfidenceLevel()
-    GGLoginPage.enterNino()
-    GGLoginPage.selectSAEnrolment()
-    GGLoginPage.clickSubmitButton()
-  }
+  Then("""^The user is directed to the existing SA service to view or perform various SA activities$""")(() =>
+    assert(SCAEnrolments.verifySAPageURL()))
 
-  // Self Assessment Exclusion Scenario
+  Then("""^I should return back to SCA home page$""")(SCAStartPage.returnToHomepage())
 
-  Given("""^I log into the GG Login Page with no SA enrolment$""") { () =>
-    GGLoginPage.navigateToAuthLoginStub()
-    GGLoginPage.enterRedirectURL()
-    GGLoginPage.selectConfidenceLevel()
-    GGLoginPage.enterNino()
-    GGLoginPage.clickSubmitButton()
+  Then("""^I should only see following services available "([^"]*)" "([^"]*)" "([^"]*)"$""") {
+    (PAYE: String, NI: String, StatePension: String) =>
+      assert(SCAEnrolments.searchResult(PAYE, NI, StatePension))
   }
 
 }

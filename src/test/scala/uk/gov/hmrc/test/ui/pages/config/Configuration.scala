@@ -21,6 +21,7 @@ case class Configuration(
   APPROOT: String,
   AUTHLOGINSTUB: String,
   FEEDBACK_PAGE: String,
+  SELFASSESSMENT_PAGE: String,
   PAGE_TIMEOUT_SECS: Int
 )
 
@@ -51,6 +52,7 @@ object Configuration {
           APPROOT = "http://localhost:8420/single-customer-account",
           AUTHLOGINSTUB = "http://localhost:9949/auth-login-stub/gg-sign-in",
           FEEDBACK_PAGE = "http://localhost:9514/feedback/single-customer-account-frontend",
+          SELFASSESSMENT_PAGE = "TBC",
           PAGE_TIMEOUT_SECS = 60
         )
 
@@ -61,6 +63,7 @@ object Configuration {
           APPROOT = "https://www.development.tax.service.gov.uk/single-customer-account",
           AUTHLOGINSTUB = "https://www.development.tax.service.gov.uk/auth-login-stub/gg-sign-in",
           FEEDBACK_PAGE = "https://www.development.tax.service.gov.uk/feedback/single-customer-account-frontend",
+          SELFASSESSMENT_PAGE = "https://www.development.service.gov.uk/self-assessment/ind/1126388017",
           PAGE_TIMEOUT_SECS = 60
         )
 
@@ -70,6 +73,7 @@ object Configuration {
           APPROOT = "https://www.qa.tax.service.gov.uk/single-customer-account",
           AUTHLOGINSTUB = "https://www.qa.tax.service.gov.uk/auth-login-stub/gg-sign-in",
           FEEDBACK_PAGE = "https://www.qa.tax.service.gov.uk/feedback/single-customer-account-frontend",
+          SELFASSESSMENT_PAGE = "https://www.qa.tax.service.gov.uk/self-assessment/ind/1126388017",
           PAGE_TIMEOUT_SECS = 60
         )
 
@@ -79,6 +83,7 @@ object Configuration {
             "https://www.staging.tax.service.gov.uk/auth-login-stub/gg-sign-in?continue=%2Fsingle-customer-account",
           APPROOT = "https://www.staging.tax.service.gov.uk/single-customer-account",
           AUTHLOGINSTUB = "https://www.staging.tax.service.gov.uk/auth-login-stub/gg-sign-in",
+          SELFASSESSMENT_PAGE = "TBC",
           FEEDBACK_PAGE = "TBC",
           PAGE_TIMEOUT_SECS = 60
         )
