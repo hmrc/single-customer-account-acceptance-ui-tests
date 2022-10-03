@@ -32,6 +32,18 @@ class GGLoginSteps extends ScalaDsl with EN with Matchers with WebBrowser {
     GGLoginPage.enterRedirectURL()
     GGLoginPage.selectConfidenceLevel()
     GGLoginPage.enterNino()
+    GGLoginPage.selectSAEnrolment()
     GGLoginPage.clickSubmitButton()
   }
+
+  // Self Assessment Exclusion Scenario
+
+  Given("""^I log into the GG Login Page with no SA enrolment$""") { () =>
+    GGLoginPage.navigateToAuthLoginStub()
+    GGLoginPage.enterRedirectURL()
+    GGLoginPage.selectConfidenceLevel()
+    GGLoginPage.enterNino()
+    GGLoginPage.clickSubmitButton()
+  }
+
 }

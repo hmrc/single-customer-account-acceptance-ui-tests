@@ -32,7 +32,7 @@ object GGLoginPage extends StartUpTearDown with GGloginPagePaths with SCAStartPa
   def navigateToAuthLoginStub(): Unit =
     driver.navigate().to(Configuration.settings.AUTHLOGINSTUB)
 
-  def enterRedirectURL(): Unit =
+  def enterRedirectURL(): Unit  =
     driver
       .findElement(By.name(redirectURLField))
       .sendKeys(Configuration.settings.APPROOT)
@@ -41,13 +41,25 @@ object GGLoginPage extends StartUpTearDown with GGloginPagePaths with SCAStartPa
     val confidenceLevel: Select = new Select(driver.findElement(By.name(confidenceLevelField)))
     confidenceLevel.selectByValue("200")
   }
-  def enterNino(): Unit        =
+  def enterNino(): Unit         =
     driver
       .findElement(By.name(nino))
       .sendKeys(NINumber)
-
+  def selectSAEnrolment(): Unit = {
+    val EnrolmentSelect: Select = new Select(driver.findElement(By.id(dropdown)))
+    EnrolmentSelect.selectByVisibleText(SelfAssessment)
+    driver.findElement(By.id(addPresent)).click()
+    driver
+      .findElement(By.id(identifierValueForUTRNumber))
+      .sendKeys(UTRNumber)
+  }
   def clickSubmitButton(): Unit =
     driver.findElement(By.id(submitButton)).click()
 
-  val NINumber = "AA999999A"
+  val NINumber                    = "AA999999A"
+  val dropdown                    = "presets-dropdown"
+  val SelfAssessment              = "SA"
+  val addPresent                  = "add-preset"
+  val identifierValueForUTRNumber = "input-4-0-value"
+  val UTRNumber                   = "1126388017"
 }
