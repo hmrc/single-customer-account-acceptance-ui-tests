@@ -20,6 +20,7 @@ Feature: As a user of SCA (Single Customer Account) application
     When I click on new service feedback link
     Then I should see feedback page contain text as "Send your feedback"
     Then I should return back to SCA home page
+    Then I should see if there is a link present on homepage to report Technical Problems "Is this page not working properly? (opens in new tab)"
     When I click on Sign out button on SCA title page header
     Then I should get re-directed to customer feedback page
     Then I should see customer feedback page contain text as "Give feedback"
