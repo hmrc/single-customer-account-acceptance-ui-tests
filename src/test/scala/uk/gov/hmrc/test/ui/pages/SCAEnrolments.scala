@@ -16,39 +16,17 @@
 
 package uk.gov.hmrc.test.ui.pages
 
-
 import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait}
 import org.openqa.selenium.{By, WebDriver}
 import uk.gov.hmrc.test.ui.PagePaths.{FeedbackPagePaths, GGloginPagePaths, SCAStartPagePaths}
 import uk.gov.hmrc.test.ui.utils.BrowserPackage.StartUpTearDown
-import uk.gov.hmrc.test.ui.pages.config.Configuration
 
 import java.time.Duration
 
 object SCAEnrolments extends StartUpTearDown with GGloginPagePaths with SCAStartPagePaths with FeedbackPagePaths {
-
-  def clickOnSelfAssessment(): Unit           = driver.findElement(By.id(selfAssesment)).click()
-
-  def verifySAPageURL(): Boolean =
+  def verifyElementAbsent: Boolean =
     new FluentWait[WebDriver](driver)
-      .withTimeout(Duration.ofSeconds(10))
+      .withTimeout(Duration.ofSeconds(1))
       .ignoring(classOf[Nothing])
-      .until(ExpectedConditions.urlMatches(Configuration.settings.SELFASSESSMENT_PAGE))
-
-  def searchResult(PAYE: String, NI: String, StatePension: String): Boolean = {
-
-    new FluentWait[WebDriver](driver)
-      .withTimeout(Duration.ofSeconds(10))
-      .ignoring(classOf[Nothing])
-      .until(ExpectedConditions.textToBePresentInElementLocated(By.id(PayAsYouEarn), PAYE))
-    new FluentWait[WebDriver](driver)
-      .withTimeout(Duration.ofSeconds(10))
-      .ignoring(classOf[Nothing])
-      .until(ExpectedConditions.textToBePresentInElementLocated(By.id(Nino), NI))
-    new FluentWait[WebDriver](driver)
-      .withTimeout(Duration.ofSeconds(10))
-      .ignoring(classOf[Nothing])
-      .until(ExpectedConditions.textToBePresentInElementLocated(By.id(Pension), StatePension))
-  }
-
+      .until(ExpectedConditions.invisibilityOfElementLocated(By.id(selfAssesment)))
 }

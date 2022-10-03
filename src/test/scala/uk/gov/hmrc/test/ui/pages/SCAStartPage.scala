@@ -16,15 +16,12 @@
 
 package uk.gov.hmrc.test.ui.pages
 
-// import com.ibm.icu.impl.Assert.fail
 import org.openqa.selenium.{By, WebDriver}
 import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait}
-// import org.scalatestplus.selenium.Chrome.{window, windowHandles}
 import uk.gov.hmrc.test.ui.PagePaths.{FeedbackPagePaths, GGloginPagePaths, SCAStartPagePaths}
 import uk.gov.hmrc.test.ui.pages.config.Configuration
 import uk.gov.hmrc.test.ui.utils.BrowserPackage.StartUpTearDown
 
-//import java.lang
 import java.time.Duration
 
 object SCAStartPage extends StartUpTearDown with GGloginPagePaths with SCAStartPagePaths with FeedbackPagePaths {
@@ -64,7 +61,21 @@ object SCAStartPage extends StartUpTearDown with GGloginPagePaths with SCAStartP
       .ignoring(classOf[Nothing])
       .until(ExpectedConditions.textToBePresentInElementLocated(By.id(accountName), name))
 
-  def clickOnTaxesAndBenefits(): Unit = driver.findElement(By.id(TaxesAndBenefits)).click()
+  def SCAMenuResult(TaxesAndBenefits: String, Messages: String, YourDetails: String): Boolean = {
+    new FluentWait[WebDriver](driver)
+      .withTimeout(Duration.ofSeconds(10))
+      .ignoring(classOf[Nothing])
+      .until(ExpectedConditions.textToBePresentInElementLocated(By.id(TaxandBenefits), TaxesAndBenefits))
+    new FluentWait[WebDriver](driver)
+      .withTimeout(Duration.ofSeconds(10))
+      .ignoring(classOf[Nothing])
+      .until(ExpectedConditions.textToBePresentInElementLocated(By.id(Msgs), Messages))
+    new FluentWait[WebDriver](driver)
+      .withTimeout(Duration.ofSeconds(10))
+      .ignoring(classOf[Nothing])
+      .until(ExpectedConditions.textToBePresentInElementLocated(By.id(PersonalDetails), YourDetails))
+  }
+  def clickOnTaxesAndBenefits(): Unit      = driver.findElement(By.id(TaxesAndBenefits)).click()
   def searchResult(SA: String, PAYE: String, NI: String, StatePension: String): Boolean = {
     new FluentWait[WebDriver](driver)
       .withTimeout(Duration.ofSeconds(10))
@@ -83,7 +94,7 @@ object SCAStartPage extends StartUpTearDown with GGloginPagePaths with SCAStartP
       .ignoring(classOf[Nothing])
       .until(ExpectedConditions.textToBePresentInElementLocated(By.id(Pension), StatePension))
   }
-  def clickOnYourDetails(): Unit      = driver.findElement(By.id(yourDetails)).click()
+  def clickOnYourDetails(): Unit           = driver.findElement(By.id(yourDetails)).click()
 
   def verifyCHOCSServiceName(chocsServiceName: String): Boolean =
     new FluentWait[WebDriver](driver)

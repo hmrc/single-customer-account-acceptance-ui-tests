@@ -19,22 +19,11 @@ package uk.gov.hmrc.test.ui.cucumber.stepdefs
 import io.cucumber.scala.{EN, ScalaDsl}
 import org.scalatest.matchers.must.Matchers
 import org.scalatestplus.selenium._
-import uk.gov.hmrc.test.ui.pages.{SCAStartPage, SCAEnrolments}
+import uk.gov.hmrc.test.ui.pages.SCAEnrolments
 
 class SCAEnrolmentsSteps extends ScalaDsl with EN with Matchers with WebBrowser {
 
-  When("""^User selects the SA service from the tax and benefits page$""") {
-    SCAEnrolments.clickOnSelfAssessment()
+  Then("""^I should not see "([^"]*)" under Your Taxes and Benefits$""") { (SA: String) =>
+    assert(SCAEnrolments.verifyElementAbsent)
   }
-
-  Then("""^The user is directed to the existing SA service to view or perform various SA activities$""")(() =>
-    assert(SCAEnrolments.verifySAPageURL()))
-
-  Then("""^I should return back to SCA home page$""")(SCAStartPage.returnToHomepage())
-
-  Then("""^I should only see following services available "([^"]*)" "([^"]*)" "([^"]*)"$""") {
-    (PAYE: String, NI: String, StatePension: String) =>
-      assert(SCAEnrolments.searchResult(PAYE, NI, StatePension))
-  }
-
 }
