@@ -16,6 +16,10 @@
 
 package uk.gov.hmrc.test.ui.PagePaths
 
+import sun.util.calendar.CalendarDate
+
+import scala.util.Random
+
 trait GGloginPagePaths {
   val redirectURLField     = "redirectionUrl"
   val confidenceLevelField = "confidenceLevel"
@@ -37,11 +41,16 @@ trait SCAStartPagePaths {
   val Nino                  = "ni"
   val Pension               = "sp"
   val yourDetails           = "nav-details"
+  val Messages              = "nav-messages"
   val CHOCSServiceName      = "/html/body/header/div[1]/div/div[2]/a"
+  val yourMessage           = "/html/body/div[2]/main/div/div/div[4]/div/table/tbody/tr/td[2]/div/span/a/span"
+  val messageInfo           = "/html/body/div[2]/main/div/div/p[2]"
+  val backButton            = "govuk-back-link"
   val Feedbacklink          = "./html/body/header/div[2]/div/p/span/a"
   val technicalProblemslink = "hmrc-report-technical-issue"
   val SignoutButton         = "nav-signout"
   val SCAAccessErrorText    = "govuk-heading-xl"
+  var APIId                 = Random.nextInt()
 }
 trait FeedbackPagePaths {
   val feedbackPageTitle        = "./html/body/div/main/div/div/form/h1"
