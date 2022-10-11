@@ -22,6 +22,13 @@ import org.scalatestplus.selenium._
 import uk.gov.hmrc.test.ui.pages.SCAStartPage
 
 class SCAStartPageSteps extends ScalaDsl with EN with Matchers with WebBrowser {
+  Given("""^message service is running i.e. get API call return '(.*)'$""") { (statuscode: Int) =>
+    assert(SCAStartPage.getMessage() equals statuscode)
+  }
+
+  Then("""^I should post a test message to message service and get the '(.*)'$""") { (statuscode: Int) =>
+    assert(SCAStartPage.postMessage() equals statuscode)
+  }
 
   Then("""^I am on SCA start page$""")(() => assert(SCAStartPage.verifySCAStartPage()))
 
@@ -65,6 +72,25 @@ class SCAStartPageSteps extends ScalaDsl with EN with Matchers with WebBrowser {
 
   Then("""^I should see CHOCS title page Header contain service name as "([^"]*)"$""") { (chocsServiceName: String) =>
     assert(SCAStartPage.verifyCHOCSServiceName(chocsServiceName))
+  }
+
+  When("""^User selects 'Messages' from the SCA home page menu$""") {
+    SCAStartPage.clickOnMessages()
+  }
+  Then("""The user can see all their messages under messages home page$""") { (Message: String) =>
+    assert(SCAStartPage.verifyMessages(Message))
+  }
+
+  When("""^User click on a Message$""") {
+    SCAStartPage.clickOnMessage()
+  }
+
+  Then("""More information related to that message can be seen under message focus page$""") { (msgInfo: String) =>
+    assert(SCAStartPage.messageInfo(msgInfo))
+  }
+
+  Then("""^The user should be able to return to Messages home page$""") {
+    SCAStartPage.clickOnBackButton()
   }
 
   Then("""^I should see if there is a link present on homepage to report Technical Problems "([^"]*)"$""") {
