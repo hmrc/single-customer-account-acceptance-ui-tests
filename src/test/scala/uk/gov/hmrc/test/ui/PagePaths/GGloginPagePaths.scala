@@ -16,8 +16,6 @@
 
 package uk.gov.hmrc.test.ui.PagePaths
 
-import sun.util.calendar.CalendarDate
-
 import scala.util.Random
 
 trait GGloginPagePaths {
