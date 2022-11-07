@@ -1,0 +1,12 @@
+{
+  "add": [
+    {
+      "contextId":"",
+      "reason": "",
+      "url": "",
+      "ruleId":"",
+      "urlIsRegex": "",
+      "newLevel":""
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-@suite
+@suite @ZAP
 Feature: As a user of SCA (Single Customer Account) web Application I should be able to login and access the list of services available on home page menu.
 
 Feature:  Post a JSON payload to message service to stub messages on SCA message page
