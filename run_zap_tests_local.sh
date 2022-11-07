@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 
-ENV="local"
-BROWSER="chrome"
+ENV=${1:-local}
+BROWSER=${2:-chrome}
+
+if [ "$BROWSER" = "chrome" ]; then
+    DRIVER="-Dwebdriver.chrome.driver=/opt/homebrew/bin/chromedriver"
+elif [ "$BROWSER" = "firefox" ]; then
+    DRIVER="-Dwebdriver.gecko.driver=/opt/homebrew/bin/geckodriver"
+fi
 
 export ZAP_FORWARD_ENABLE="true"
 export ZAP_FORWARD_PORTS=$(sm -s | grep -E 'PASS|BOOT' | awk '{print $12}' | tr "\n" " ")
