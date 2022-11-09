@@ -61,9 +61,14 @@ class SCAStartPageSteps extends ScalaDsl with EN with Matchers with WebBrowser {
     SCAStartPage.clickOnTaxesAndBenefits()
   }
 
-  Then("""^I should see following services available "([^"]*)" "([^"]*)" "([^"]*)" "([^"]*)"$""") {
-    (SA: String, PAYE: String, NI: String, StatePension: String) =>
-      assert(SCAStartPage.searchResult(SA, PAYE, NI, StatePension))
+  Then("""^I should see following tiles on the page "([^"]*)" "([^"]*)" "([^"]*)"$""") {
+    (SA: String, PAYE: String, StatePension: String) =>
+      assert(SCAStartPage.searchResult(SA, PAYE, StatePension))
+  }
+
+  Then("""^The user should see "Your State Pension” tile with following links "([^"]*)" and "([^"]*)"$""") {
+    (statePensionLink: String, niLink: String ) =>
+      assert(SCAStartPage.verifyStatePensionLinks(statePensionLink, niLink ))
   }
 
   When("""^I click on 'Your Details' on SCA landing page menu$""") {

@@ -57,11 +57,9 @@ object SCAStartPage
            |         "value":"1632631936"
            |      },
            |      "name":{
-           |         "title":"Mr",
-           |         "forename":"John",
-           |         "secondForename":"Harry",
-           |         "surname":"Johnson",
-           |         "honours":"OBE"
+           |         "forename":"Edward",
+           |         "secondForename":"A",
+           |         "surname":"Robertson"
            |      },
            |      "email":"someEmail@test.com"
            |   },
@@ -135,7 +133,7 @@ object SCAStartPage
       .until(ExpectedConditions.textToBePresentInElementLocated(By.id(PersonalDetails), YourDetails))
   }
   def clickOnTaxesAndBenefits(): Unit                           = driver.findElement(By.id(TaxesAndBenefits)).click()
-  def searchResult(SA: String, PAYE: String, NI: String, StatePension: String): Boolean = {
+  def searchResult(SA: String, PAYE: String, StatePension: String): Boolean = {
     new FluentWait[WebDriver](driver)
       .withTimeout(Duration.ofSeconds(10))
       .ignoring(classOf[Nothing])
@@ -144,10 +142,6 @@ object SCAStartPage
       .withTimeout(Duration.ofSeconds(10))
       .ignoring(classOf[Nothing])
       .until(ExpectedConditions.textToBePresentInElementLocated(By.id(PayAsYouEarn), PAYE))
-    new FluentWait[WebDriver](driver)
-      .withTimeout(Duration.ofSeconds(10))
-      .ignoring(classOf[Nothing])
-      .until(ExpectedConditions.textToBePresentInElementLocated(By.id(Nino), NI))
     new FluentWait[WebDriver](driver)
       .withTimeout(Duration.ofSeconds(10))
       .ignoring(classOf[Nothing])
