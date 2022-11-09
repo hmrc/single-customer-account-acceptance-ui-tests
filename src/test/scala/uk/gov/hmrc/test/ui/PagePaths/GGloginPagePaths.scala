@@ -37,6 +37,8 @@ trait SCAStartPagePaths {
   val selfAssesment         = "sa"
   val PayAsYouEarn          = "paye"
   val Pension               = "nisp"
+  val statePensionURL       = "/html/body/div[2]/main/div/div/div[1]/main/div/div/div[3]/div/div/p[3]/a"
+  val niURL                 = "/html/body/div[2]/main/div/div/div[1]/main/div/div/div[3]/div/div/p[4]/a"
   val yourDetails           = "nav-details"
   val Messages              = "nav-messages"
   val CHOCSServiceName      = "/html/body/header/div[1]/div/div[2]/a"

@@ -31,10 +31,12 @@ Feature:  Post a JSON payload to message service to stub messages on SCA message
   Scenario: As an Individual I want to have the ability from the SCA WAT service to go to Pension /NI information so that, I can have the ability to easily navigate between pages and access various features available in Pension and NI service.
     When I click on 'Your Taxes and Benefits' on SCA landing page menu
     Then The user should see "Your State Pension” tile with following links "Check your State Pension summary" and "Check your National Insurance record"
-    When user selects "Check your State Pension summary" link in State pension tile
-    Then system directs the user to the available NISP service
-    When user selects "Check your National Insurance record" link in State pension tile
-    Then system directs the user to the available NISP service
+    When User selects 'Check your State Pension summary' link in State pension tile
+    Then System directs the user to State Pension summary page
+    Then The user should be able to return to 'Your taxes and benefits' page
+    When User selects 'Check your National Insurance record' NI link in State pension tile
+    Then System directs the user to National Insurance record page
+    Then The user should be able to return to 'Your taxes and benefits' page
 
   Scenario: As an Individual, I want to have the ability to navigate from the SCA sign in page to a Messages page So that, I can access and read all messages and communication including documents from HMRC in one place.
     When User selects 'Messages' from the SCA home page menu
@@ -47,7 +49,7 @@ Feature:  Post a JSON payload to message service to stub messages on SCA message
     """
     SCA Test Message
     """
-    Then The user should be able to return to Messages home page
+    Then The user should be able to return to previous page
 
   Scenario: As a user of SCA web Application I should be able to access CHOCS (Change of Circumstances) service from SCA home page menu
 

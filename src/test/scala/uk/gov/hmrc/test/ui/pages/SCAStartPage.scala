@@ -133,11 +133,7 @@ object SCAStartPage
       .until(ExpectedConditions.textToBePresentInElementLocated(By.id(PersonalDetails), YourDetails))
   }
   def clickOnTaxesAndBenefits(): Unit                           = driver.findElement(By.id(TaxesAndBenefits)).click()
-  def searchResult(SA: String, PAYE: String, StatePension: String): Boolean = {
-    new FluentWait[WebDriver](driver)
-      .withTimeout(Duration.ofSeconds(10))
-      .ignoring(classOf[Nothing])
-      .until(ExpectedConditions.textToBePresentInElementLocated(By.id(selfAssesment), SA))
+  def searchResult(PAYE: String, SA: String, StatePension: String): Boolean = {
     new FluentWait[WebDriver](driver)
       .withTimeout(Duration.ofSeconds(10))
       .ignoring(classOf[Nothing])
@@ -145,8 +141,34 @@ object SCAStartPage
     new FluentWait[WebDriver](driver)
       .withTimeout(Duration.ofSeconds(10))
       .ignoring(classOf[Nothing])
+      .until(ExpectedConditions.textToBePresentInElementLocated(By.id(selfAssesment), SA))
+    new FluentWait[WebDriver](driver)
+      .withTimeout(Duration.ofSeconds(10))
+      .ignoring(classOf[Nothing])
       .until(ExpectedConditions.textToBePresentInElementLocated(By.id(Pension), StatePension))
   }
+  def verifyStatePensionLinks(statePensionLink: String, niLink: String): Boolean = {
+    new FluentWait[WebDriver](driver)
+      .withTimeout(Duration.ofSeconds(10))
+      .ignoring(classOf[Nothing])
+      .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(statePensionURL), statePensionLink))
+    new FluentWait[WebDriver](driver)
+      .withTimeout(Duration.ofSeconds(10))
+      .ignoring(classOf[Nothing])
+      .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(niURL), niLink))
+  }
+  def clickOnStatePensionSummary(): Unit                        = driver.findElement(By.xpath(statePensionURL)).click()
+  def verifyStatePensionPageURL(): Boolean                      =
+    new FluentWait[WebDriver](driver)
+      .withTimeout(Duration.ofSeconds(10))
+      .ignoring(classOf[Nothing])
+      .until(ExpectedConditions.urlMatches(Configuration.settings.STATEPENSION_PAGE))
+  def clickOnNIRecord(): Unit                                   = driver.findElement(By.xpath(niURL)).click()
+  def verifyNIRecordPageURL(): Boolean                          =
+    new FluentWait[WebDriver](driver)
+      .withTimeout(Duration.ofSeconds(10))
+      .ignoring(classOf[Nothing])
+      .until(ExpectedConditions.urlMatches(Configuration.settings.NI_PAGE))
   def clickOnYourDetails(): Unit                                = driver.findElement(By.id(yourDetails)).click()
   def verifyCHOCSServiceName(chocsServiceName: String): Boolean =
     new FluentWait[WebDriver](driver)
@@ -175,7 +197,7 @@ object SCAStartPage
       .ignoring(classOf[Nothing])
       .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(serviceFeedbackPageTitle), feedbackPageText))
 
-  def returnToHomepage(): Unit         = driver.navigate.back()
+  def returnToPreviousPage(): Unit     = driver.navigate.back()
   def clickOnSignout(): Unit           = driver.findElement(By.id(SignoutButton)).click()
   def verifyFeedbackPageURL(): Boolean =
     new FluentWait[WebDriver](driver)

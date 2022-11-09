@@ -62,14 +62,32 @@ class SCAStartPageSteps extends ScalaDsl with EN with Matchers with WebBrowser {
   }
 
   Then("""^I should see following tiles on the page "([^"]*)" "([^"]*)" "([^"]*)"$""") {
-    (SA: String, PAYE: String, StatePension: String) =>
-      assert(SCAStartPage.searchResult(SA, PAYE, StatePension))
+    (PAYE: String, SA: String, StatePension: String) =>
+      assert(SCAStartPage.searchResult(PAYE, SA, StatePension))
   }
 
   Then("""^The user should see "Your State Pension” tile with following links "([^"]*)" and "([^"]*)"$""") {
-    (statePensionLink: String, niLink: String ) =>
-      assert(SCAStartPage.verifyStatePensionLinks(statePensionLink, niLink ))
+    (statePensionLink: String, niLink: String) =>
+      assert(SCAStartPage.verifyStatePensionLinks(statePensionLink, niLink))
   }
+
+  When("""User selects 'Check your State Pension summary' link in State pension tile$""") {
+    SCAStartPage.clickOnStatePensionSummary()
+  }
+
+  Then("""^System directs the user to State Pension summary page$""")(() =>
+    assert(SCAStartPage.verifyStatePensionPageURL())
+  )
+
+  Then("""^The user should be able to return to 'Your taxes and benefits' page$""")(SCAStartPage.returnToPreviousPage())
+
+  When("""User selects 'Check your National Insurance record' NI link in State pension tile$""") {
+    SCAStartPage.clickOnNIRecord()
+  }
+
+  Then("""^System directs the user to National Insurance record page$""")(() =>
+    assert(SCAStartPage.verifyNIRecordPageURL())
+  )
 
   When("""^I click on 'Your Details' on SCA landing page menu$""") {
     SCAStartPage.clickOnYourDetails()
@@ -94,7 +112,7 @@ class SCAStartPageSteps extends ScalaDsl with EN with Matchers with WebBrowser {
     assert(SCAStartPage.messageInfo(msgInfo))
   }
 
-  Then("""^The user should be able to return to Messages home page$""") {
+  Then("""^The user should be able to return to previous page$""") {
     SCAStartPage.clickOnBackButton()
   }
 
@@ -111,7 +129,7 @@ class SCAStartPageSteps extends ScalaDsl with EN with Matchers with WebBrowser {
     assert(SCAStartPage.verifyNewServiceFeedbackPageText(feedbackPageText))
   }
 
-  Then("""^I should return back to SCA home page$""")(SCAStartPage.returnToHomepage())
+  Then("""^I should return back to SCA home page$""")(SCAStartPage.returnToPreviousPage())
 
   When("""^I click on Sign out button on SCA title page header$""") {
     SCAStartPage.clickOnSignout()
