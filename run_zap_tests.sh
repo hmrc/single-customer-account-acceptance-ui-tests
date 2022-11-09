@@ -9,4 +9,4 @@ elif [ "$BROWSER" = "firefox" ]; then
     DRIVER="-Dwebdriver.gecko.driver=/opt/homebrew/bin/geckodriver"
 fi
 
-sbt -Dbrowser=$BROWSER -Denvironment=$ENV $DRIVER "testOnly uk.gov.hmrc.test.ui.cucumber.runner.ZapRunner"
+sbt -Dhttp.proxyHost=localhost -Dhttp.proxyPort=11000 -Dbrowser=$BROWSER -Denvironment=$ENV $DRIVER "testOnly uk.gov.hmrc.test.ui.cucumber.runner.ZapRunner"
