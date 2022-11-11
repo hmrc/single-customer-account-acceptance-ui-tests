@@ -1,0 +1,11 @@
+{
+  "add": [
+    {
+      "reason": "Caused by auth-login-stub not having Anti-CSRF tokens found in a HTML submission form",
+      "contextId": 1,
+      "url": "http://localhost:9949/auth-login-stub/gg-sign-in.*",
+      "ruleId": 10031,
+      "urlIsRegex": "true"
+    }
+  ]
+}
