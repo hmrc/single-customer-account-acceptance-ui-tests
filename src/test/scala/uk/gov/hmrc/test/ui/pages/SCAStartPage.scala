@@ -18,6 +18,7 @@ package uk.gov.hmrc.test.ui.pages
 
 import org.openqa.selenium.{By, WebDriver}
 import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait}
+import org.scalatest.matchers.must.Matchers.{be, convertToAnyMustWrapper}
 import scalaj.http.Http
 import uk.gov.hmrc.test.ui.PagePaths.{FeedbackPagePaths, GGloginPagePaths, SCAStartPagePaths}
 import uk.gov.hmrc.test.ui.pages.config.Configuration
@@ -57,11 +58,9 @@ object SCAStartPage
            |         "value":"1632631936"
            |      },
            |      "name":{
-           |         "title":"Mr",
-           |         "forename":"John",
-           |         "secondForename":"Harry",
-           |         "surname":"Johnson",
-           |         "honours":"OBE"
+           |         "forename":"Edward",
+           |         "secondForename":"A",
+           |         "surname":"Robertson"
            |      },
            |      "email":"someEmail@test.com"
            |   },
@@ -102,19 +101,13 @@ object SCAStartPage
       .ignoring(classOf[Nothing])
       .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(serviceName), headerServiceName))
 
-  def verifySCAStartPageFooter(footerName: String): Boolean           =
+  def verifySCAStartPageFooter(footerName: String): Boolean =
     new FluentWait[WebDriver](driver)
       .withTimeout(Duration.ofSeconds(10))
       .ignoring(classOf[Nothing])
       .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(footer), footerName))
-  def verifyTechnicalProblemsLink(technicalProblems: String): Boolean =
-    new FluentWait[WebDriver](driver)
-      .withTimeout(Duration.ofSeconds(10))
-      .ignoring(classOf[Nothing])
-      .until(ExpectedConditions.textToBePresentInElementLocated(By.className(technicalProblemslink), technicalProblems))
-
-  def clickOnAccountHome(): Unit                                = driver.findElement(By.id(accountHome)).click()
-  def searchResults(name: String): Boolean                      =
+  def clickOnAccountHome(): Unit                            = driver.findElement(By.id(accountHome)).click()
+  def searchResults(name: String): Boolean                  =
     new FluentWait[WebDriver](driver)
       .withTimeout(Duration.ofSeconds(10))
       .ignoring(classOf[Nothing])
@@ -134,12 +127,8 @@ object SCAStartPage
       .ignoring(classOf[Nothing])
       .until(ExpectedConditions.textToBePresentInElementLocated(By.id(PersonalDetails), YourDetails))
   }
-  def clickOnTaxesAndBenefits(): Unit                           = driver.findElement(By.id(TaxesAndBenefits)).click()
-  def searchResult(SA: String, PAYE: String, NI: String, StatePension: String): Boolean = {
-    new FluentWait[WebDriver](driver)
-      .withTimeout(Duration.ofSeconds(10))
-      .ignoring(classOf[Nothing])
-      .until(ExpectedConditions.textToBePresentInElementLocated(By.id(selfAssesment), SA))
+  def clickOnTaxesAndBenefits(): Unit                       = driver.findElement(By.id(TaxesAndBenefits)).click()
+  def searchResult(PAYE: String, SA: String, StatePension: String): Boolean = {
     new FluentWait[WebDriver](driver)
       .withTimeout(Duration.ofSeconds(10))
       .ignoring(classOf[Nothing])
@@ -147,54 +136,47 @@ object SCAStartPage
     new FluentWait[WebDriver](driver)
       .withTimeout(Duration.ofSeconds(10))
       .ignoring(classOf[Nothing])
-      .until(ExpectedConditions.textToBePresentInElementLocated(By.id(Nino), NI))
+      .until(ExpectedConditions.textToBePresentInElementLocated(By.id(selfAssesment), SA))
     new FluentWait[WebDriver](driver)
       .withTimeout(Duration.ofSeconds(10))
       .ignoring(classOf[Nothing])
       .until(ExpectedConditions.textToBePresentInElementLocated(By.id(Pension), StatePension))
   }
-  def clickOnYourDetails(): Unit                                = driver.findElement(By.id(yourDetails)).click()
-  def verifyCHOCSServiceName(chocsServiceName: String): Boolean =
+  def verifyStatePensionLinks(statePensionLink: String, niLink: String): Boolean = {
     new FluentWait[WebDriver](driver)
       .withTimeout(Duration.ofSeconds(10))
       .ignoring(classOf[Nothing])
-      .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(CHOCSServiceName), chocsServiceName))
-
-  def clickOnMessages(): Unit                  = driver.findElement(By.id(Messages)).click()
-  def verifyMessages(Message: String): Boolean =
+      .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(statePensionURL), statePensionLink))
     new FluentWait[WebDriver](driver)
       .withTimeout(Duration.ofSeconds(10))
       .ignoring(classOf[Nothing])
-      .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(yourMessage), Message))
-  def clickOnMessage(): Unit                   = driver.findElement(By.xpath(yourMessage)).click()
-  def messageInfo(msgInfo: String): Boolean    =
+      .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(niURL), niLink))
+  }
+  def clickOnStatePensionSummary(): Unit                    = driver.findElement(By.xpath(statePensionURL)).click()
+  def verifyStatePensionPageURL(): Boolean                  =
     new FluentWait[WebDriver](driver)
       .withTimeout(Duration.ofSeconds(10))
       .ignoring(classOf[Nothing])
-      .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(messageInfo), msgInfo))
-  def clickOnBackButton(): Unit                = driver.findElement(By.className(backButton)).click()
-  def clickOnFeedback(): Unit                  = driver.findElement(By.xpath(Feedbacklink)).click()
-
-  def verifyNewServiceFeedbackPageText(feedbackPageText: String): Boolean =
+      .until(ExpectedConditions.urlMatches(Configuration.settings.STATEPENSION_PAGE))
+  def clickOnNIRecord(): Unit                               = driver.findElement(By.xpath(niURL)).click()
+  def verifyNIRecordPageURL(): Boolean                      =
     new FluentWait[WebDriver](driver)
       .withTimeout(Duration.ofSeconds(10))
       .ignoring(classOf[Nothing])
-      .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(serviceFeedbackPageTitle), feedbackPageText))
-
-  def returnToHomepage(): Unit         = driver.navigate.back()
-  def clickOnSignout(): Unit           = driver.findElement(By.id(SignoutButton)).click()
-  def verifyFeedbackPageURL(): Boolean =
+      .until(ExpectedConditions.urlMatches(Configuration.settings.NI_PAGE))
+  def clickOnYourDetails(): Unit                            = driver.findElement(By.id(yourDetails)).click()
+  def clickOnMessages(): Unit                               = driver.findElement(By.id(Messages)).click()
+  def clickOnMessage(): Unit                                = driver.findElement(By.xpath(yourMessage)).click()
+  def clickOnBackButton(): Unit                             = driver.findElement(By.className(backButton)).click()
+  def clickOnFeedback(): Unit                               = driver.findElement(By.xpath(Feedbacklink)).click()
+  def returnToPreviousPage(): Unit                          = driver.navigate.back()
+  def clickOnSignout(): Unit                                = driver.findElement(By.id(SignoutButton)).click()
+  def verifyFeedbackPageURL(): Boolean                      =
     new FluentWait[WebDriver](driver)
       .withTimeout(Duration.ofSeconds(10))
       .ignoring(classOf[Nothing])
       .until(ExpectedConditions.urlMatches(Configuration.settings.FEEDBACK_PAGE))
-
-  def verifyFeedbackPageText(feedbackPageText: String): Boolean =
-    new FluentWait[WebDriver](driver)
-      .withTimeout(Duration.ofSeconds(10))
-      .ignoring(classOf[Nothing])
-      .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(feedbackPageTitle), feedbackPageText))
-
-  val HomepageTitle = "Single Customer Account"
+  def assertContent(id: By, expectedText: String)           = driver.findElement(id).getText must be(expectedText)
+  val HomepageTitle                                         = "Single Customer Account"
 
 }

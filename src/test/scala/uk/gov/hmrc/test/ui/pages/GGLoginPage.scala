@@ -56,7 +56,7 @@ object GGLoginPage extends StartUpTearDown with GGloginPagePaths with SCAStartPa
   def clickSubmitButton(): Unit =
     driver.findElement(By.id(submitButton)).click()
 
-  val NINumber                    = "AA999999A"
+  val NINumber                    = "HT009413A"
   val dropdown                    = "presets-dropdown"
   val SelfAssessment              = "SA"
   val addPresent                  = "add-preset"
