@@ -23,7 +23,7 @@ import uk.gov.hmrc.test.ui.pages.{GGLoginPage, GGLoginPageInvalidConfidenceLevel
 
 class GGLoginInvalidConfidenceLevel extends ScalaDsl with EN with Matchers with WebBrowser {
 
-  Given("""^I log into the GGLogin Page$""") { () =>
+  Given("""^I login to the GGLogin Page$""") { () =>
     GGLoginPage.navigateToAuthLoginStub()
     GGLoginPage.enterRedirectURL()
   }
