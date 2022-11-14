@@ -23,7 +23,7 @@ import uk.gov.hmrc.test.ui.pages.{GGLoginPage, GGLoginPageInvalidConfidenceLevel
 
 class GGLoginInvalidConfidenceLevel extends ScalaDsl with EN with Matchers with WebBrowser {
 
-  Given("""^I login to the GGLogin Page$""") { () =>
+  Given("""User login to the GGLogin Page$""") { () =>
     GGLoginPage.navigateToAuthLoginStub()
     GGLoginPage.enterRedirectURL()
   }
@@ -34,7 +34,7 @@ class GGLoginInvalidConfidenceLevel extends ScalaDsl with EN with Matchers with 
     GGLoginPage.clickSubmitButton()
   }
 
-  Then("""^I should see SCA home page with an error "([^"]*)"$""") { (accessError: String) =>
+  Then("""^User should see SCA home page with an error "([^"]*)"$""") { (accessError: String) =>
     assert(GGLoginPageInvalidConfidenceLevel.verifySCAStartPageAccessError(accessError))
   }
 
