@@ -23,95 +23,84 @@ import org.scalatestplus.selenium._
 import uk.gov.hmrc.test.ui.pages.SCAStartPage
 
 class SCAStartPageSteps extends ScalaDsl with EN with Matchers with WebBrowser {
-  Given("""^message service is running i.e. get API call return '(.*)'$""") { (statuscode: Int) =>
+  Given("""Message service is running i.e. get API call return '(.*)'$""") { (statuscode: Int) =>
     assert(SCAStartPage.getMessage() equals statuscode)
   }
 
-  Then("""^I should post a test message to message service and get the '(.*)'$""") { (statuscode: Int) =>
+  Then("""Post a test message to message service and get the '(.*)'$""") { (statuscode: Int) =>
     assert(SCAStartPage.postMessage() equals statuscode)
   }
 
-  Then("""^I am on SCA start page$""")(() => assert(SCAStartPage.verifySCAStartPage()))
+  Then("""User is on SCA start page$""")(() => assert(SCAStartPage.verifySCAStartPage()))
 
-  Then("""^I should see SCA title page Header contain logo text as (.*)$""") { (logoText: String) =>
-    assert(SCAStartPage.verifySCAStartPageHeaderLogoText(logoText))
+  Then("""User should see SCA title page Header contain logo text as (.*) in (.*)$""") {
+    (value: String, locator: String) =>
+      SCAStartPage.assertContent(By.xpath("//*[@class='" + locator + "']"), value)
   }
 
-  Then("""^I should see SCA title page Header contain service name as (.*)$""") { (serviceName: String) =>
-    assert(SCAStartPage.verifySCAStartPageHeaderServiceName(serviceName))
+  Then("""User should see SCA title page Header contain service name as (.*) in (.*)$""") {
+    (value: String, locator: String) =>
+      SCAStartPage.assertContent(By.xpath("//*[@class='" + locator + "']"), value)
   }
 
-  Then("""^I should see SCA title page footer contain (.*)$""") { (pageFooterName: String) =>
-    assert(SCAStartPage.verifySCAStartPageFooter(pageFooterName))
+  Then("""User should see SCA title page footer contain (.*) in (.*)$""") { (value: String, locator: String) =>
+    SCAStartPage.assertContent(By.xpath("//*[@class='" + locator + "']"), value)
   }
 
-  Then("""^I should see SCA user name as (.*)$""") { (name: String) =>
+  Then("""User should see SCA user name as (.*)$""") { (name: String) =>
     assert(SCAStartPage.searchResults(name))
   }
 
-  When("""^I click on 'Home' on SCA landing page menu$""") {
-    SCAStartPage.clickOnAccountHome()
+  When("""User click (.*) on SCA landing page menu by (.*) (.*)$""") {
+    (text: String, identifier: String, locator: String) =>
+      identifier match {
+        case "id" => SCAStartPage.clickOn(By.id(locator))
+        case _    => throw new RuntimeException("Type of element identifier not found")
+      }
   }
 
-  Then("""^I should see following services on home page menu (.*), (.*) and (.*)$""") {
+  Then("""User should see following services on home page menu (.*), (.*) and (.*)$""") {
     (TaxesAndBenefits: String, Messages: String, YourDetails: String) =>
       assert(SCAStartPage.SCAMenuResult(TaxesAndBenefits, Messages, YourDetails))
   }
 
-  When("""^I click on 'Your Taxes and Benefits' on SCA landing page menu$""") {
-    SCAStartPage.clickOnTaxesAndBenefits()
-  }
-
-  Then("""^I should see following tiles on the page (.*), (.*) and (.*)$""") {
+  Then("""User should see following tiles on the page (.*), (.*) and (.*)$""") {
     (PAYE: String, SA: String, StatePension: String) =>
       assert(SCAStartPage.searchResult(PAYE, SA, StatePension))
   }
 
-  Then("""^The user should see "Your State Pension” tile with following links (.*) and (.*)$""") {
-    (statePensionLink: String, niLink: String) =>
-      assert(SCAStartPage.verifyStatePensionLinks(statePensionLink, niLink))
-  }
-
-  When("""User selects 'Check your State Pension summary' link in State pension tile$""") {
+  When("""User selects Check your State Pension summary link in State Pension tile$""") {
     SCAStartPage.clickOnStatePensionSummary()
   }
 
-  Then("""^System directs the user to State Pension summary page$""")(() =>
+  Then("""System directs the user to State Pension summary page$""")(() =>
     assert(SCAStartPage.verifyStatePensionPageURL())
   )
 
-  Then("""^User see (.*) in (.*)$""") { (value: String, locator: String) =>
+  Then("""User see (.*) in (.*)$""") { (value: String, locator: String) =>
     SCAStartPage.assertContent(By.xpath("//*[@class='" + locator + "']"), value)
   }
 
-  Then("""^The user should be able to return to 'Your taxes and benefits' page$""")(SCAStartPage.returnToPreviousPage())
+  Then("""The user should be able to return to 'Your taxes and benefits' page$""")(SCAStartPage.returnToPreviousPage())
 
-  When("""User selects 'Check your National Insurance record' NI link in State pension tile$""") {
+  When("""User selects Check your National Insurance record link in State Pension tile$""") {
     SCAStartPage.clickOnNIRecord()
   }
 
-  Then("""^System directs the user to National Insurance record page$""")(() =>
+  Then("""System directs the user to National Insurance record page$""")(() =>
     assert(SCAStartPage.verifyNIRecordPageURL())
   )
 
-  When("""^I click on 'Your Details' on SCA landing page menu$""") {
-    SCAStartPage.clickOnYourDetails()
-  }
-
-  Then("""^I should see CHOCS title page Header contain service name as (.*) in (.*)$""") {
+  Then("""User should see CHOCS title page Header contain service name as (.*) in (.*)$""") {
     (chocsServiceName: String, locator: String) =>
       SCAStartPage.assertContent(By.xpath("//*[@class='" + locator + "']"), chocsServiceName)
-  }
-
-  When("""^User selects 'Messages' from the SCA home page menu$""") {
-    SCAStartPage.clickOnMessages()
   }
 
   Then("""The user can see their messages under messages home page (.*)$""") { (Message: String) =>
     SCAStartPage.assertContent(By.xpath("//*[(text()='" + Message + "')]"), Message)
   }
 
-  When("""^User click on a Message$""") {
+  When("""User click on a Message$""") {
     SCAStartPage.clickOnMessage()
   }
 
@@ -119,11 +108,11 @@ class SCAStartPageSteps extends ScalaDsl with EN with Matchers with WebBrowser {
     SCAStartPage.assertContent(By.xpath("//*[(text()='" + Message + "')]"), Message)
   }
 
-  Then("""^The user should be able to return to previous page$""") {
+  Then("""The user should be able to return to previous page$""") {
     SCAStartPage.clickOnBackButton()
   }
 
-  Then("""^I should see if there is a link present on homepage to report Technical Problems (.*)$""") {
+  Then("""User should see if there is a link present on homepage to report Technical Problems (.*)$""") {
     (technicalProblemsLink: String) =>
       SCAStartPage.assertContent(
         By.xpath("//*[contains(text(),'" + technicalProblemsLink + "')]"),
@@ -131,23 +120,19 @@ class SCAStartPageSteps extends ScalaDsl with EN with Matchers with WebBrowser {
       )
   }
 
-  When("""^I click on new service feedback link$""") {
+  When("""User click on new service feedback link$""") {
     SCAStartPage.clickOnFeedback()
   }
 
-  Then("""^I should see feedback page contain text as (.*)$""") { (feedbackPageText: String) =>
+  Then("""User should see feedback page contain text as (.*)$""") { (feedbackPageText: String) =>
     SCAStartPage.assertContent(By.xpath("//*[(text()='" + feedbackPageText + "')]"), feedbackPageText)
   }
 
-  Then("""^I should return back to SCA home page$""")(SCAStartPage.returnToPreviousPage())
+  Then("""User should return back to SCA home page$""")(SCAStartPage.returnToPreviousPage())
 
-  When("""^I click on Sign out button on SCA title page header$""") {
-    SCAStartPage.clickOnSignout()
-  }
+  Then("""User should get re-directed to customer feedback page$""")(() => assert(SCAStartPage.verifyFeedbackPageURL()))
 
-  Then("""^I should get re-directed to customer feedback page$""")(() => assert(SCAStartPage.verifyFeedbackPageURL()))
-
-  Then("""^I should see customer feedback page contain text as (.*)$""") { (feedbackPageText: String) =>
+  Then("""User should see customer feedback page contain text as (.*)$""") { (feedbackPageText: String) =>
     SCAStartPage.assertContent(By.xpath("//*[(text()='" + feedbackPageText + "')]"), feedbackPageText)
   }
 

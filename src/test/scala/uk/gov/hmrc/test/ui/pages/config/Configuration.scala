@@ -30,10 +30,10 @@ object Configuration {
 
   lazy val environment: Option[String] = {
     System.getProperty("environment", "local").toLowerCase match {
-      case "local"   => None
-      case "dev"     => Some("https://www.development.tax.service.gov.uk")
-      case "qa"      => Some("https://www.qa.tax.service.gov.uk")
-      case "staging" => Some("https://www.staging.tax.service.gov.uk")
+      case "local"             => None
+      case "dev"               => Some("https://www.development.tax.service.gov.uk")
+      case "qa"                => Some("https://www.qa.tax.service.gov.uk")
+      case "staging"           => Some("https://www.staging.tax.service.gov.uk")
       case environmentProperty => throw new IllegalArgumentException(s"Environment '$environmentProperty' not known")
     }
   }
