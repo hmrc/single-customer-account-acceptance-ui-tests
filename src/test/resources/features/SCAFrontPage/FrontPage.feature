@@ -27,16 +27,7 @@ Feature:  Post a JSON payload to message service to stub messages on SCA message
   Scenario: Given an individual who has SA subscribed (trading or incorporated) signs into SCA web application then the user should see following service tiles under Your taxes and benefits.
     When User click Your Taxes and Benefits on SCA landing page menu by id nav-taxes-and-benefits
     Then User should see following tiles on the page Income from employment, Self Assessment and Your State Pension
-
-  Scenario: As an Individual I want to have the ability from the SCA WAT service to go to Pension /NI information so that, I can have the ability to easily navigate between pages and access various features available in Pension and NI service.
-    When User selects Check your State Pension summary link in State Pension tile
-    Then System directs the user to State Pension summary page
-    Then User see Your State Pension summary in govuk-heading-xl
-    Then The user should be able to return to 'Your taxes and benefits' page
-    When User selects Check your National Insurance record link in State Pension tile
-    Then System directs the user to National Insurance record page
-    Then User see Your National Insurance record in govuk-heading-xl
-    Then The user should be able to return to 'Your taxes and benefits' page
+    Then User should see following links Check your State Pension summary and Check your National Insurance record under State Pension tile
 
   Scenario: As an Individual, I want to have the ability to navigate from the SCA sign in page to a Messages page So that, I can access and read all messages and communication including documents from HMRC in one place.
     When User click Messages on SCA landing page menu by id nav-messages

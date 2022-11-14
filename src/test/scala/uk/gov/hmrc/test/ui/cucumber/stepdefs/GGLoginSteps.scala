@@ -22,11 +22,6 @@ import org.scalatestplus.selenium._
 import uk.gov.hmrc.test.ui.pages.GGLoginPage
 
 class GGLoginSteps extends ScalaDsl with EN with Matchers with WebBrowser {
-  /*
-  Given("""^I am on GG Login Page$""") { () =>
-    GGLoginPage.navigateToStartPage()
-  }
-   */
 
   Given("""^User login to the GG Login Page$""") { () =>
     GGLoginPage.navigateToAuthLoginStub()

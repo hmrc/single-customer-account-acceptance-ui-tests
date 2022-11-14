@@ -123,7 +123,7 @@ object SCAStartPage
       .ignoring(classOf[Nothing])
       .until(ExpectedConditions.textToBePresentInElementLocated(By.id(Pension), StatePension))
   }
-  def verifyStatePensionLinks(statePensionLink: String, niLink: String): Boolean = {
+  def searchNISP(statePensionLink: String, niLink: String): Boolean = {
     new FluentWait[WebDriver](driver)
       .withTimeout(Duration.ofSeconds(Configuration.settings.PAGE_TIMEOUT_SECS))
       .ignoring(classOf[Nothing])
@@ -133,18 +133,6 @@ object SCAStartPage
       .ignoring(classOf[Nothing])
       .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(niURL), niLink))
   }
-  def clickOnStatePensionSummary(): Unit          = driver.findElement(By.linkText(statePensionURL)).click()
-  def verifyStatePensionPageURL(): Boolean        =
-    new FluentWait[WebDriver](driver)
-      .withTimeout(Duration.ofSeconds(Configuration.settings.PAGE_TIMEOUT_SECS))
-      .ignoring(classOf[Nothing])
-      .until(ExpectedConditions.urlMatches(Configuration.settings.STATEPENSION_PAGE))
-  def clickOnNIRecord(): Unit                     = driver.findElement(By.linkText(niURL)).click()
-  def verifyNIRecordPageURL(): Boolean            =
-    new FluentWait[WebDriver](driver)
-      .withTimeout(Duration.ofSeconds(Configuration.settings.PAGE_TIMEOUT_SECS))
-      .ignoring(classOf[Nothing])
-      .until(ExpectedConditions.urlMatches(Configuration.settings.NI_PAGE))
   def clickOnMessage(): Unit                      = driver.findElement(By.partialLinkText(yourMessage)).click()
   def clickOnBackButton(): Unit                   = driver.findElement(By.className(backButton)).click()
   def clickOnFeedback(): Unit                     = driver.findElement(By.xpath(Feedbacklink)).click()
