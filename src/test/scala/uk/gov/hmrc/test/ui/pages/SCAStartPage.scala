@@ -133,6 +133,11 @@ object SCAStartPage
       .ignoring(classOf[Nothing])
       .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(niURL), niLink))
   }
+  def checkMessage(Message: String): Boolean      =
+    new FluentWait[WebDriver](driver)
+      .withTimeout(Duration.ofSeconds(Configuration.settings.PAGE_TIMEOUT_SECS))
+      .ignoring(classOf[Nothing])
+      .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(scaMessage), Message))
   def clickOnMessage(): Unit                      = driver.findElement(By.partialLinkText(yourMessage)).click()
   def clickOnBackButton(): Unit                   = driver.findElement(By.className(backButton)).click()
   def clickOnFeedback(): Unit                     = driver.findElement(By.xpath(Feedbacklink)).click()

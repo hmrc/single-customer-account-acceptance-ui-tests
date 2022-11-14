@@ -80,7 +80,7 @@ class SCAStartPageSteps extends ScalaDsl with EN with Matchers with WebBrowser {
   }
 
   Then("""The user can see their messages under messages home page (.*)$""") { (Message: String) =>
-    SCAStartPage.assertContent(By.xpath("//*[(text()='" + Message + "')]"), Message)
+    assert(SCAStartPage.checkMessage(Message))
   }
 
   When("""User click on a Message$""") {
