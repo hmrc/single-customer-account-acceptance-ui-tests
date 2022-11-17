@@ -53,7 +53,7 @@ object Configuration {
       APPROOT = s"$environmentUrl/single-customer-account",
       AUTHLOGINSTUB = s"$environmentUrl/auth-login-stub/gg-sign-in",
       FEEDBACK_PAGE = s"$environmentUrl/feedback/single-customer-account-frontend",
-      STATEPENSION_PAGE = s"h$environmentUrl/check-your-state-pension/account",
+      STATEPENSION_PAGE = s"$environmentUrl/check-your-state-pension/account",
       NI_PAGE = s"$environmentUrl/check-your-state-pension/account/nirecord"
     )
   }
