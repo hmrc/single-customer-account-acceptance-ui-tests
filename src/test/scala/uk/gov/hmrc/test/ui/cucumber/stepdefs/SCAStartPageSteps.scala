@@ -74,6 +74,28 @@ class SCAStartPageSteps extends ScalaDsl with EN with Matchers with WebBrowser {
       assert(SCAStartPage.searchNISP(statePensionLink, niLink))
   }
 
+  When("""User selects Check your State Pension summary link in State Pension tile$""") {
+    SCAStartPage.clickOnStatePensionSummary()
+  }
+
+  Then("""System directs the user to State Pension summary page$""")(() =>
+    assert(SCAStartPage.verifyStatePensionPageURL())
+  )
+
+  Then("""User see (.*) in (.*)$""") { (value: String, locator: String) =>
+    SCAStartPage.assertContent(By.xpath("//*[@class='" + locator + "']"), value)
+  }
+
+  Then("""The user should be able to return to 'Your taxes and benefits' page$""")(SCAStartPage.returnToPreviousPage())
+
+  When("""User selects Check your National Insurance record link in State Pension tile$""") {
+    SCAStartPage.clickOnNIRecord()
+  }
+
+  Then("""System directs the user to National Insurance record page$""")(() =>
+    assert(SCAStartPage.verifyNIRecordPageURL())
+  )
+
   Then("""User should see CHOCS title page Header contain service name as (.*) in (.*)$""") {
     (chocsServiceName: String, locator: String) =>
       SCAStartPage.assertContent(By.xpath("//*[@class='" + locator + "']"), chocsServiceName)

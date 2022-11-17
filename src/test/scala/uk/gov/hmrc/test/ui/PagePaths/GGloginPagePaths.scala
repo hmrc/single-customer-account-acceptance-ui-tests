@@ -34,6 +34,8 @@ trait SCAStartPagePaths {
   val Pension            = "nisp"
   val statePensionURL    = "//a[normalize-space()='Check your State Pension summary']"
   val niURL              = "//a[normalize-space()='Check your National Insurance record']"
+  val statePensionLink   = "Check your State Pension summary"
+  val niLink             = "Check your National Insurance record"
   val scaMessage         = "//span[contains(text(),'SCA Test Message')]"
   val yourMessage        = "SCA Test Message"
   val backButton         = "govuk-back-link"

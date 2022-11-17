@@ -133,6 +133,18 @@ object SCAStartPage
       .ignoring(classOf[Nothing])
       .until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(niURL), niLink))
   }
+  def clickOnStatePensionSummary(): Unit          = driver.findElement(By.linkText(statePensionLink)).click()
+  def verifyStatePensionPageURL(): Boolean        =
+    new FluentWait[WebDriver](driver)
+      .withTimeout(Duration.ofSeconds(Configuration.settings.PAGE_TIMEOUT_SECS))
+      .ignoring(classOf[Nothing])
+      .until(ExpectedConditions.urlMatches(Configuration.settings.STATEPENSION_PAGE))
+  def clickOnNIRecord(): Unit                     = driver.findElement(By.linkText(niLink)).click()
+  def verifyNIRecordPageURL(): Boolean            =
+    new FluentWait[WebDriver](driver)
+      .withTimeout(Duration.ofSeconds(Configuration.settings.PAGE_TIMEOUT_SECS))
+      .ignoring(classOf[Nothing])
+      .until(ExpectedConditions.urlMatches(Configuration.settings.NI_PAGE))
   def checkMessage(Message: String): Boolean      =
     new FluentWait[WebDriver](driver)
       .withTimeout(Duration.ofSeconds(Configuration.settings.PAGE_TIMEOUT_SECS))
