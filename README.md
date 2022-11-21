@@ -6,54 +6,24 @@ UI test suite for the `Single Customer Account` using WebDriver and `<scalatest/
 ## Running the tests
 
 Prior to executing the tests ensure you have:
- - Docker - to run mongo and browser (Chrome or Firefox) inside a container 
  - Appropriate [drivers installed](#installing-local-driver-binaries) - to run tests against locally installed Browser
  - Installed/configured [service manager](https://github.com/hmrc/service-manager).  
 
 Run the following command to start services locally:
-
-    docker run --rm -d --name mongo -d -p 27017:27017 mongo:4.0
     sm --start SCA_FUTURES_ALL -r --wait 100
 
 Using the `--wait 100` argument ensures a health check is run on all the services started as part of the profile. `100` refers to the given number of seconds to wait for services to pass health checks.
 
-Then execute the `run_tests.sh` script:
-
+To run tests on local environment use below command:
     ./run_tests.sh <browser-driver> <environment> 
 
-The `run_tests.sh` script defaults to using `chrome` in the `local` environment.  For a complete list of supported param values, see:
- - `src/test/resources/application.conf` for **environment** 
- - [webdriver-factory](https://github.com/hmrc/webdriver-factory#2-instantiating-a-browser-with-default-options) for **browser-driver**
+To run tests on QA environment use below command:
+    ./run_sca_contract_tests.sh <broswer-driver> <environment>
 
-## Running tests against a containerised browser - on a developer machine
-
-The script `./run_browser_with_docker.sh` can be used to start a Chrome or Firefox container on a developer machine. 
-The script requires `remote-chrome` or `remote-firefox` as an argument.
-
-Read more about the script's functionality [here](run_browser_with_docker.sh).
-
-To run against a containerised Chrome browser:
-
-```bash
-./run_browser_with_docker.sh remote-chrome 
-./run_tests.sh remote-chrome local
-```
-
-`./run_browser_with_docker.sh` is **NOT** required when running in a CI environment. 
-
-#### Running the tests against a test environment
-
-To run the tests against an environment set the corresponding `host` environment property as specified under
- `<env>.host.services` in the [application.conf](/src/test/resources/application.conf). 
-
-For example, to execute the `run_tests.sh` script using Chrome remote-webdriver against QA environment 
-
-    ./run_tests.sh remote-chrome qa
+Note: browser-driver and environment are optional and default driver is chrome if no input is provided. 
 
 ## Running ZAP tests
-
-ZAP tests can be automated using the HMRC Dynamic Application Security Testing approach. Running 
-automated ZAP tests should not be considered a substitute for manual exploratory testing using OWASP ZAP.
+Currently ZAP tests are run on local environment using Jenkins build.
 
 #### Tagging tests for ZAP
 
@@ -74,17 +44,8 @@ tagged as `ZapTests`, via ZAP.
 For example, to execute ZAP tests locally using a Chrome browser
 
 ```
-./run_zap_test.sh chrome local
+./run_zap_tests.sh chrome local
 ```
-
-To execute ZAP tests locally using a remote-chrome browser
-
-```
-./run_browser_with_docker.sh remote-chrome 
-./run_zap_test.sh remote-chrome local
-``` 
-
-`./run_browser_with_docker.sh` is **NOT** required when running in a CI environment.
 
 ### Running tests using BrowserStack
 If you would like to run your tests via BrowserStack from your local development environment please refer to the [webdriver-factory](https://github.com/hmrc/webdriver-factory/blob/main/README.md/#user-content-running-tests-using-browser-stack) project.
