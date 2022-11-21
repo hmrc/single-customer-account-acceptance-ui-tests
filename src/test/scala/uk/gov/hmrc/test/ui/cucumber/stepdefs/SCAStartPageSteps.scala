@@ -69,12 +69,20 @@ class SCAStartPageSteps extends ScalaDsl with EN with Matchers with WebBrowser {
       assert(SCAStartPage.searchResult(PAYE, SA, StatePension))
   }
 
+  When("""User click 'Complete your tax return' link under Self Assessment tile$""") {
+    SCAStartPage.clickOnTaxReturn()
+  }
+
+  Then("""The user can see their tax details under (.*) in (.*)$""") { (value: String, locator: String) =>
+    SCAStartPage.assertContent(By.xpath("//*[@class='" + locator + "']"), value)
+  }
+
   Then("""User should see following links (.*) and (.*) under State Pension tile$""") {
     (statePensionLink: String, niLink: String) =>
       assert(SCAStartPage.searchNISP(statePensionLink, niLink))
   }
 
-  When("""User selects Check your State Pension summary link in State Pension tile$""") {
+  When("""User selects 'Check your State Pension summary' link in State Pension tile$""") {
     SCAStartPage.clickOnStatePensionSummary()
   }
 
@@ -88,7 +96,7 @@ class SCAStartPageSteps extends ScalaDsl with EN with Matchers with WebBrowser {
 
   Then("""The user should be able to return to 'Your taxes and benefits' page$""")(SCAStartPage.returnToPreviousPage())
 
-  When("""User selects Check your National Insurance record link in State Pension tile$""") {
+  When("""User selects 'Check your National Insurance record' link in State Pension tile$""") {
     SCAStartPage.clickOnNIRecord()
   }
 
