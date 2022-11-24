@@ -21,6 +21,7 @@ Feature: As a user of SCA (Single Customer Account) web Application I should be 
     Then The user can see their tax details under At a glance in govuk-heading-xl
     Then The user should be able to return to 'Your taxes and benefits' page
 
+
   Scenario: As an Individual I want to have the ability from the SCA WAT service to go to Pension /NI information so that, I can have the ability to easily navigate between pages and access various features available in Pension and NI service.
     When User selects 'Check your State Pension summary' link in State Pension tile
     Then System directs the user to State Pension summary page
@@ -30,6 +31,13 @@ Feature: As a user of SCA (Single Customer Account) web Application I should be 
     Then System directs the user to National Insurance record page
     Then User see Your National Insurance record in govuk-heading-xl
     Then The user should be able to return to 'Your taxes and benefits' page
+
+  Scenario: As an Individual, I want to have the ability to navigate from the SCA sign in page to a Messages page So that, I can access and read all messages and communication including documents from HMRC in one place.
+    When User click Messages on SCA landing page menu by id nav-messages
+    Then The user can see their messages under messages home page Reminder to file a Self Assessment return
+    When User click on a Message
+    Then More information related to that message can be seen under message focus page Reminder to file a Self Assessment return
+    Then The user should be able to return to previous page
 
   Scenario: As a user of SCA web Application I should be able to access CHOCS (Change of Circumstances) service from SCA home page menu
     When User click Your Details on SCA landing page menu by id nav-details
