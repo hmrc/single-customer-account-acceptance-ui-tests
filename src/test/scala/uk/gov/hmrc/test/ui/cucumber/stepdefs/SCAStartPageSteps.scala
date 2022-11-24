@@ -23,13 +23,6 @@ import org.scalatestplus.selenium._
 import uk.gov.hmrc.test.ui.pages.SCAStartPage
 
 class SCAStartPageSteps extends ScalaDsl with EN with Matchers with WebBrowser {
-  Given("""Message service is running i.e. get API call return '(.*)'$""") { (statuscode: Int) =>
-    assert(SCAStartPage.getMessage() equals statuscode)
-  }
-
-  Then("""Post a test message to message service and get the '(.*)'$""") { (statuscode: Int) =>
-    assert(SCAStartPage.postMessage() equals statuscode)
-  }
 
   Then("""User is on SCA start page$""")(() => assert(SCAStartPage.verifySCAStartPage()))
 

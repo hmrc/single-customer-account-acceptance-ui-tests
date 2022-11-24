@@ -1,16 +1,6 @@
 @suite @ZAP
 Feature: As a user of SCA (Single Customer Account) web Application I should be able to login and access the list of services available on home page menu.
 
-Feature:  Post a JSON payload to message service to stub messages on SCA message page
-
-  Scenario Outline:: Post an API call to message service to mimic messages on SCA message page
-    Given Message service is running i.e. get API call return '<getStatusCode>'
-    Then Post a test message to message service and get the '<postStatusCode>'
-
-    Examples:
-      | getStatusCode | postStatusCode |
-      | 200           | 201            |
-
   Scenario: User logins to SCA web application and should see default GOV.UK header and footer along with service name so user is reassured they have signed into Government service.
     Given User login to the GG Login Page
     And User is on SCA start page
@@ -31,9 +21,9 @@ Feature:  Post a JSON payload to message service to stub messages on SCA message
 
   Scenario: As an Individual, I want to have the ability to navigate from the SCA sign in page to a Messages page So that, I can access and read all messages and communication including documents from HMRC in one place.
     When User click Messages on SCA landing page menu by id nav-messages
-    Then The user can see their messages under messages home page SCA Test Message
+    Then The user can see their messages under messages home page Reminder to file a Self Assessment return
     When User click on a Message
-    Then More information related to that message can be seen under message focus page SCA Test Message
+    Then More information related to that message can be seen under message focus page Reminder to file a Self Assessment return
     Then The user should be able to return to previous page
 
   Scenario: As a user of SCA web Application I should be able to access CHOCS (Change of Circumstances) service from SCA home page menu
