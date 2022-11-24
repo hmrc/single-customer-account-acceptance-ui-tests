@@ -37,12 +37,11 @@ trait SCAStartPagePaths {
   val taxReturnLink      = "Complete your tax return"
   val statePensionLink   = "Check your State Pension summary"
   val niLink             = "Check your National Insurance record"
-  val scaMessage         = "//span[contains(text(),'SCA Test Message')]"
-  val yourMessage        = "SCA Test Message"
+  val scaMessage         = "//span[contains(text(),'Reminder to file a Self Assessment return')]"
+  val yourMessage        = "Reminder to file a Self Assessment return"
   val backButton         = "govuk-back-link"
   val Feedbacklink       = "./html/body/header/div[2]/div/p/span/a"
   val SCAAccessErrorText = "govuk-heading-xl"
-  var APIId              = Random.nextInt()
 }
 trait FeedbackPagePaths {
   val TechnicalHelpPage      = "./html/body/div/main/div/div/a"
